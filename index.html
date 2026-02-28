@@ -1,1811 +1,1556 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Jesser Hamdi is a Flutter-first software engineering student delivering polished mobile, IoT, and AI experiences.">
-    <meta name="author" content="Jesser Hamdi">
-    <meta name="keywords" content="Flutter, Mobile Developer, IoT, AI, Jesser Hamdi, SalahMate, PlantCare">
-    <title>Jesser Hamdi · Flutter & IoT Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --bg: #f5f7fb;
-            --bg-alt: #ffffff;
-            --bg-soft: rgba(37, 99, 235, 0.08);
-            --text: #0b1221;
-            --text-muted: #55607a;
-            --card-border: rgba(11, 18, 33, 0.07);
-            --primary: #2563eb;
-            --primary-strong: #1d4ed8;
-            --accent: #10b981;
-            --radius-lg: 24px;
-            --radius-md: 18px;
-            --radius-sm: 12px;
-            --shadow-lg: 0 32px 60px rgba(13, 23, 44, 0.12);
-            --shadow-md: 0 18px 40px rgba(13, 23, 44, 0.1);
-            --shadow-sm: 0 8px 24px rgba(13, 23, 44, 0.08);
-            color-scheme: light;
-        }
-
-        body[data-theme="dark"] {
-            --bg: #0f172a;
-            --bg-alt: rgba(15, 23, 42, 0.7);
-            --bg-soft: rgba(37, 99, 235, 0.16);
-            --text: #f8fafc;
-            --text-muted: rgba(226, 232, 240, 0.75);
-            --card-border: rgba(148, 163, 184, 0.12);
-            --primary: #60a5fa;
-            --primary-strong: #3b82f6;
-            --accent: #34d399;
-            --shadow-lg: 0 32px 60px rgba(2, 6, 23, 0.5);
-            --shadow-md: 0 18px 40px rgba(2, 6, 23, 0.45);
-            --shadow-sm: 0 8px 24px rgba(2, 6, 23, 0.35);
-            color-scheme: dark;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            transition: background 0.4s ease, color 0.4s ease;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        main {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Ambient background */
-        .ambient {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-            mix-blend-mode: screen;
-        }
-
-        .ambient .light {
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            background: radial-gradient(circle, color-mix(in srgb, var(--primary) 22%, transparent 78%) 0%, transparent 70%);
-            opacity: 0.32;
-            filter: blur(8px);
-            animation: ambientFloat 16s ease-in-out infinite;
-        }
-
-        .ambient .light:nth-child(1) {
-            top: -12%;
-            left: 15%;
-            animation-duration: 18s;
-        }
-
-        .ambient .light:nth-child(2) {
-            bottom: -14%;
-            right: 12%;
-            animation-duration: 20s;
-            animation-delay: 2s;
-        }
-
-        .ambient .light:nth-child(3) {
-            top: 32%;
-            left: 50%;
-            transform: translateX(-50%);
-            animation-duration: 22s;
-            animation-delay: 4s;
-        }
-
-        @keyframes ambientFloat {
-            0% {
-                transform: translate3d(0, 0, 0) scale(1);
-                opacity: 0.28;
-            }
-
-            50% {
-                transform: translate3d(8%, -6%, 0) scale(1.12);
-                opacity: 0.46;
-            }
-
-            100% {
-                transform: translate3d(0, 0, 0) scale(1);
-                opacity: 0.28;
-            }
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            inset: 0 0 auto 0;
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--card-border);
-            background: color-mix(in srgb, var(--bg) 82%, transparent 18%);
-            z-index: 100;
-            transition: background 0.4s ease, border-color 0.4s ease;
-        }
-
-        .nav-container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 1.1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-            font-weight: 600;
-        }
-
-        .brand-mark {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            display: grid;
-            place-items: center;
-            color: #fff;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-        }
-
-        .brand span {
-            font-size: 1rem;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .nav-links a {
-            position: relative;
-            padding: 0.35rem 0;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -0.3rem;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 999px;
-            transform-origin: left;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .nav-links a:hover::after,
-        .nav-links a:focus-visible::after {
-            transform: scaleX(1);
-        }
-
-        .theme-toggle {
-            border: 1px solid var(--card-border);
-            border-radius: 999px;
-            padding: 0.45rem 0.9rem;
-            background: color-mix(in srgb, var(--bg) 40%, var(--primary) 8%);
-            color: var(--text);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-weight: 500;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-1px);
-        }
-
-        .mobile-trigger {
-            display: none;
-            flex-direction: column;
-            gap: 0.28rem;
-            cursor: pointer;
-            padding: 0.6rem;
-            border-radius: 8px;
-            background: var(--bg-alt);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-sm);
-            transition: background 0.3s ease, transform 0.2s ease;
-        }
-
-        .mobile-trigger:hover {
-            background: color-mix(in srgb, var(--bg-alt) 90%, var(--primary) 5%);
-            transform: scale(1.05);
-        }
-
-        .mobile-trigger span {
-            width: 24px;
-            height: 2px;
-            border-radius: 999px;
-            background: var(--text);
-            transition: transform 0.3s ease;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            padding: 180px 1.5rem 120px;
-            position: relative;
-        }
-
-        .hero::before,
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: clamp(320px, 55vw, 540px);
-            height: clamp(320px, 55vw, 540px);
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--bg-soft) 0%, transparent 65%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .hero::before {
-            top: -12%;
-            left: -15%;
-        }
-
-        .hero::after {
-            bottom: -18%;
-            right: -10%;
-        }
-
-        .hero-inner {
-            max-width: 880px;
-            padding: clamp(2.3rem, 6vw, 4.4rem);
-            border-radius: var(--radius-lg);
-            background: color-mix(in srgb, var(--bg-alt) 78%, transparent 22%);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .hero-inner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--primary) 18%, transparent 82%), transparent 55%), radial-gradient(circle at 90% 25%, color-mix(in srgb, var(--accent) 22%, transparent 78%), transparent 60%), linear-gradient(120deg, transparent 0%, color-mix(in srgb, var(--primary) 12%, transparent 88%) 60%, transparent 100%);
-            opacity: 0;
-            animation: heroGlow 8s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .hero-inner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 12%, transparent 88%), transparent 65%);
-            mix-blend-mode: lighten;
-            opacity: 0;
-            animation: heroSweep 12s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes heroGlow {
-
-            0%,
-            100% {
-                opacity: 0.25;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.4;
-                transform: scale(1.03);
-            }
-        }
-
-        @keyframes heroSweep {
-
-            0%,
-            100% {
-                opacity: 0;
-                transform: translateX(-18%);
-            }
-
-            40% {
-                opacity: 0.22;
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: translateX(12%);
-            }
-
-            70% {
-                opacity: 0.18;
-            }
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            padding: 0.4rem 1rem;
-            border-radius: 999px;
-            background: color-mix(in srgb, var(--primary) 14%, transparent 86%);
-            color: var(--primary-strong);
-            font-weight: 600;
-            margin-bottom: 1.6rem;
-            border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent 75%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-badge::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, #ffffff 12%, transparent 88%) 40%, transparent 100%);
-            transform: translateX(-100%);
-            animation: badgeShine 6s ease-in-out infinite;
-        }
-
-        @keyframes badgeShine {
-
-            0%,
-            55% {
-                transform: translateX(-110%);
-            }
-
-            65% {
-                transform: translateX(110%);
-            }
-
-            100% {
-                transform: translateX(110%);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.6rem, 5vw, 3.6rem);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        #cursor {
-            animation: blink 1s infinite;
-            color: var(--primary);
-        }
-
-        .typing-done #cursor {
-            animation: none;
-            opacity: 0;
-        }
-
-        @keyframes blink {
-
-            0%,
-            50% {
-                opacity: 1;
-            }
-
-            51%,
-            100% {
-                opacity: 0;
-            }
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: clamp(1.05rem, 2.5vw, 1.2rem);
-            margin-bottom: 1.9rem;
-        }
-
-        .hero-actions {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.7rem;
-            position: relative;
-        }
-
-        .hero-actions::after {
-            content: '';
-            position: absolute;
-            bottom: -18px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: clamp(120px, 22vw, 220px);
-            height: 46px;
-            filter: blur(28px);
-            background: color-mix(in srgb, var(--primary) 22%, transparent 78%);
-            opacity: 0.25;
-            pointer-events: none;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            padding: 0.9rem 1.6rem;
-            border-radius: 999px;
-            font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
-            border: 1px solid transparent;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-            color: #fff;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 28px 46px rgba(37, 99, 235, 0.28);
-        }
-
-        .btn-neutral {
-            background: color-mix(in srgb, var(--bg) 70%, var(--primary) 8%);
-            color: var(--text);
-            border-color: var(--card-border);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary-strong);
-            border-color: color-mix(in srgb, var(--primary) 45%, transparent 55%);
-        }
-
-        .btn-neutral:hover,
-        .btn-outline:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .hero-tags {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .chip {
-            padding: 0.35rem 0.9rem;
-            border-radius: 999px;
-            background: color-mix(in srgb, var(--primary) 10%, transparent 90%);
-            color: var(--primary-strong);
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent 80%);
-        }
-
-        .hero-tags .chip {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .hero-tags .chip:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .hero-tags .chip:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .hero-tags .chip:nth-child(3) {
-            animation-delay: 1s;
-        }
-
-        .hero-tags .chip:nth-child(4) {
-            animation-delay: 1.5s;
-        }
-
-        .hero-tags .chip:nth-child(5) {
-            animation-delay: 2s;
-        }
-
-        .hero-tags .chip:nth-child(6) {
-            animation-delay: 2.5s;
-        }
-
-        .hero-tags .chip:nth-child(7) {
-            animation-delay: 3s;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        /* Sections */
-        section {
-            padding: clamp(3.5rem, 7vw, 5.5rem) 1.5rem;
-        }
-
-        .section-frame {
-            max-width: 1180px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            max-width: 720px;
-            margin: 0 auto 2.8rem;
-            text-align: center;
-        }
-
-        .section-header h2 {
-            font-size: clamp(2rem, 4vw, 2.6rem);
-            margin-bottom: 0.8rem;
-            letter-spacing: -0.01em;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-        }
-
-        .grid {
-            display: grid;
-            gap: clamp(1.5rem, 3vw, 2.4rem);
-        }
-
-        /* About */
-        .about-wrap {
-            display: grid;
-            gap: 2rem;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-
-        .card {
-            background: color-mix(in srgb, var(--bg-alt) 86%, transparent 14%);
-            padding: clamp(1.6rem, 4vw, 2.2rem);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-sm);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            letter-spacing: -0.01em;
-        }
-
-        .card p,
-        .card li {
-            color: var(--text-muted);
-        }
-
-        .stat-list {
-            display: grid;
-            gap: 1.3rem;
-        }
-
-        .stat {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .stat strong {
-            font-size: 1.15rem;
-        }
-
-        /* Projects */
-        .project-grid {
-            display: grid;
-            gap: clamp(1.8rem, 3vw, 2.4rem);
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-
-        .project-card {
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-            padding: clamp(1.7rem, 4vw, 2rem);
-            border-radius: var(--radius-md);
-            background: color-mix(in srgb, var(--bg-alt) 90%, transparent 10%);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.3s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            opacity: 0;
-            background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 25%, transparent 75%), transparent 65%);
-            transition: opacity 0.35s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-            border-color: color-mix(in srgb, var(--primary) 20%, var(--card-border) 80%);
-        }
-
-        .project-card:hover::after {
-            opacity: 1;
-        }
-
-        .project-top {
-            position: relative;
-            z-index: 1;
-        }
-
-        .project-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            color: var(--primary-strong);
-            margin-bottom: 0.4rem;
-        }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .project-card p {
-            color: var(--text-muted);
-        }
-
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.45rem;
-        }
-
-        .project-meta .chip {
-            background: color-mix(in srgb, var(--bg) 70%, var(--primary) 12%);
-            border-color: color-mix(in srgb, var(--primary) 35%, transparent 65%);
-        }
-
-        .project-list {
-            display: grid;
-            gap: 0.6rem;
-            color: var(--text-muted);
-        }
-
-        .project-list li {
-            display: flex;
-            gap: 0.55rem;
-        }
-
-        .project-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .project-links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-weight: 600;
-            color: var(--primary-strong);
-        }
-
-        .subheading {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 3rem 0 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
-        }
-
-        /* Skills */
-        .skill-grid {
-            display: grid;
-            gap: clamp(1.5rem, 3vw, 2.3rem);
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        }
-
-        .skill-card {
-            padding: clamp(1.6rem, 4vw, 2.1rem);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--card-border);
-            background: color-mix(in srgb, var(--bg-alt) 88%, transparent 12%);
-            box-shadow: var(--shadow-sm);
-            display: grid;
-            gap: 1rem;
-        }
-
-        .skill-card h3 {
-            font-size: 1.2rem;
-        }
-
-        .skill-list {
-            display: grid;
-            gap: 0.65rem;
-            color: var(--text-muted);
-        }
-
-        .skill-list li {
-            display: flex;
-            gap: 0.5rem;
-            align-items: flex-start;
-        }
-
-        /* Experience */
-        .timeline {
-            display: grid;
-            gap: 2rem;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--primary), transparent);
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 40px 1fr;
-            gap: 1.5rem;
-            position: relative;
-        }
-
-        .timeline-marker {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 3px solid var(--bg);
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 15%, transparent 85%);
-            position: relative;
-            top: 0.4rem;
-            transition: transform 0.6s ease, box-shadow 0.6s ease;
-        }
-
-        .timeline-item.visible .timeline-marker {
-            transform: scale(1.2);
-            box-shadow: 0 0 0 8px color-mix(in srgb, var(--primary) 25%, transparent 75%), 0 0 20px color-mix(in srgb, var(--primary) 40%, transparent 60%);
-        }
-
-        .timeline-card {
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-md);
-            padding: clamp(1.6rem, 3.5vw, 2rem);
-            background: color-mix(in srgb, var(--bg-alt) 90%, transparent 10%);
-            box-shadow: var(--shadow-sm);
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .timeline-card header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0.75rem;
-            align-items: baseline;
-        }
-
-        .timeline-card h3 {
-            font-size: 1.2rem;
-            letter-spacing: -0.01em;
-        }
-
-        .timeline-card span {
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        .timeline-card ul {
-            color: var(--text-muted);
-            display: grid;
-            gap: 0.55rem;
-        }
-
-        /* Education */
-        .education-card {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .education-card strong {
-            font-size: 1.1rem;
-        }
-
-        /* Contact */
-        .contact-grid {
-            display: grid;
-            gap: clamp(1.4rem, 3vw, 2rem);
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        }
-
-        .contact-card {
-            padding: clamp(1.6rem, 3.5vw, 2rem);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--card-border);
-            background: color-mix(in srgb, var(--bg-alt) 88%, transparent 12%);
-            box-shadow: var(--shadow-sm);
-            display: grid;
-            gap: 0.6rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .contact-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle, color-mix(in srgb, var(--primary) 20%, transparent 80%) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .contact-card:hover::after {
-            opacity: 1;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.5;
-            }
-
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-        }
-
-        .contact-card small {
-            text-transform: uppercase;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
-        }
-
-        .contact-card a {
-            font-weight: 600;
-            color: var(--primary-strong);
-        }
-
-        .footer {
-            padding: 2.4rem 1.5rem 3.5rem;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .footer span {
-            display: block;
-            margin-top: 0.4rem;
-        }
-
-        /* Mouse light */
-        #mouse-light {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, color-mix(in srgb, var(--primary) 20%, transparent 80%) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.4;
-            transition: opacity 0.3s ease;
-            mix-blend-mode: screen;
-        }
-
-        body:hover #mouse-light {
-            opacity: 0.7;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 960px) {
-            .nav-links {
-                position: fixed;
-                top: 72px;
-                left: 0;
-                right: 1.5rem;
-                background: color-mix(in srgb, var(--bg) 90%, transparent 10%);
-                border: 1px solid var(--card-border);
-                border-radius: var(--radius-md);
-                box-shadow: var(--shadow-md);
-                padding: 1.4rem;
-                flex-direction: column;
-                gap: 0.85rem;
-                min-width: unset;
-                display: none;
-                z-index: 101;
-            }
-
-            .nav-links a {
-                padding: 0.5rem 0.2rem;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .mobile-trigger {
-                display: flex;
-            }
-
-            .theme-toggle {
-                display: none;
-            }
-
-            .hero-inner {
-                padding: 2.2rem;
-                text-align: left;
-            }
-
-            .hero-actions {
-                gap: 0.75rem;
-                justify-content: flex-start;
-            }
-
-            .project-card,
-            .skill-card,
-            .timeline-card {
-                padding: 1.6rem;
-            }
-        }
-
-        @media (max-width: 620px) {
-            .nav-container {
-                padding: 1rem 1.4rem;
-            }
-
-            .nav-links {
-                top: 4rem;
-            }
-
-            section {
-                padding: 3.2rem 1.4rem;
-            }
-
-            .hero {
-                padding: 150px 1.3rem 110px;
-            }
-
-            .hero-inner {
-                padding: 1.9rem;
-            }
-
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .section-header {
-                margin-bottom: 2.2rem;
-                text-align: left;
-            }
-
-            .section-header h2 {
-                font-size: 1.9rem;
-            }
-
-            .project-card,
-            .skill-card,
-            .timeline-card,
-            .card,
-            .contact-card {
-                padding: 1.45rem;
-            }
-
-            .project-links {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .timeline::before {
-                left: 12px;
-            }
-
-            .timeline-item {
-                grid-template-columns: 30px 1fr;
-            }
-        }
-
-        @media (max-width: 460px) {
-            .nav-container {
-                padding-top: 0.6rem;
-                padding-right: 3rem;
-                padding-bottom: 0.6rem;
-                padding-left: 0.5rem;
-                gap: 1rem;
-                max-width: 100%;
-                justify-content: space-between;
-            }
-
-            .nav-links {
-                top: 3.5rem;
-                left: 0;
-                right: 1rem;
-            }
-
-            .brand-mark {
-                width: 38px;
-                height: 38px;
-            }
-
-            .brand {
-                gap: 0.85rem;
-            }
-
-            .mobile-trigger {
-                z-index: 110;
-            }
-
-            .hero {
-                padding: 140px 1.1rem 96px;
-            }
-
-            .hero-inner {
-                padding: 1.7rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-tags {
-                gap: 0.45rem;
-            }
-
-            .chip {
-                font-size: 0.8rem;
-            }
-
-            .project-card,
-            .skill-card,
-            .timeline-card,
-            .card,
-            .contact-card {
-                padding: 1.35rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: 1.85rem;
-            }
-
-            .hero-actions {
-                gap: 0.55rem;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
-            }
-
-            .project-card,
-            .skill-card,
-            .timeline-card,
-            .card,
-            .contact-card {
-                padding: 1.25rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.75rem;
-            }
-
-            .nav-links {
-                top: 3rem;
-            }
-
-            .brand span {
-                font-size: 0.88rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .brand-mark {
-                width: 32px;
-                height: 32px;
-            }
-        }
-    </style>
+  <!-- ============================================
+       SalahMate — Official Homepage
+       All-in-one Islamic Companion App
+       ============================================ -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SalahMate — Your All-in-One Islamic Companion App</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="SalahMate is a lightweight, distraction-free Islamic companion app featuring Quran reading, multiple recitations, Tafsir, prayer times, Qibla direction, daily Adhkar, and offline support." />
+  <meta name="keywords" content="SalahMate, Quran app, prayer times, Islamic app, Qibla, Adhkar, Tafsir, Muslim app, Salah, Android" />
+  <meta name="author" content="GroveReaper" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#121212" />
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="SalahMate — Your All-in-One Islamic Companion App" />
+  <meta property="og:description" content="Quran, Prayer Times, Qibla, Adhkar & more — beautifully simple, distraction-free, and built for focus." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jesser.me/SalahMate_privacy_policy/" />
+  <meta property="og:image" content="images/salahMate.png" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="SalahMate — Your All-in-One Islamic Companion App" />
+  <meta name="twitter:description" content="Quran, Prayer Times, Qibla, Adhkar & more — beautifully simple." />
+  <meta name="twitter:image" content="images/salahMate.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/salahMate.png" type="image/png" />
+  <link rel="apple-touch-icon" href="images/salahMate.png" />
+
+  <!-- Google Fonts — Inter for clean modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==============================================
+       CSS RESET & BASE STYLES
+       ============================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #121212;
+      color: #FFFFFF;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    /* ==============================================
+       CSS CUSTOM PROPERTIES
+       ============================================== */
+    :root {
+      --primary: #4285F4;
+      --primary-hover: #1A73E8;
+      --secondary: #7BAAF7;
+      --secondary-hover: #5B98F3;
+      --error: #EF5350;
+      --error-hover: #E53935;
+      --surface: #202124;
+      --background: #121212;
+      --text-on-primary: #FFFFFF;
+      --text-primary-light: #202124;
+      --pure-black: #000000;
+      --text-muted: #9AA0A6;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      --max-width: 1200px;
+    }
+
+    /* ==============================================
+       UTILITY CLASSES
+       ============================================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    /* ==============================================
+       BUTTONS
+       ============================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--text-on-primary);
+      box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus-visible {
+      background-color: var(--primary-hover);
+      box-shadow: 0 4px 16px rgba(66, 133, 244, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-outline:hover,
+    .btn-outline:focus-visible {
+      background-color: rgba(66, 133, 244, 0.1);
+    }
+
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .btn-large {
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      border-radius: var(--radius-md);
+    }
+
+    /* ==============================================
+       HEADER / NAVIGATION
+       ============================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background-color: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background-color var(--transition);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition);
+      position: relative;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: #FFFFFF;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: width var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .header .btn {
+      padding: 10px 20px;
+      font-size: 0.875rem;
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      color: #FFFFFF;
+    }
+
+    .menu-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ==============================================
+       HERO SECTION
+       ============================================== */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle radial glow behind hero */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(66, 133, 244, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 540px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: rgba(66, 133, 244, 0.12);
+      border: 1px solid rgba(66, 133, 244, 0.2);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--secondary);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--primary);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 5vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 460px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .hero-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Phone mockup placeholder */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-img {
+      width: 300px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 80px rgba(66, 133, 244, 0.1);
+      display: block;
+    }
+
+    /* ==============================================
+       FEATURES SECTION
+       ============================================== */
+    .features {
+      background-color: var(--background);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all var(--transition);
+    }
+
+    .feature-card:hover {
+      border-color: rgba(66, 133, 244, 0.2);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(66, 133, 244, 0.1);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #FFFFFF;
+    }
+
+    .feature-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ==============================================
+       WHY SALAHMATE SECTION
+       ============================================== */
+    .why-section {
+      background-color: var(--surface);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .why-content .section-subtitle {
+      margin-bottom: 36px;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .why-item-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: rgba(66, 133, 244, 0.1);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+    }
+
+    .why-item-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .why-item-text h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .why-item-text p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .why-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .why-card-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .why-card {
+      background-color: var(--background);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all var(--transition);
+    }
+
+    .why-card:hover {
+      border-color: rgba(66, 133, 244, 0.2);
+    }
+
+    .why-card-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: rgba(66, 133, 244, 0.1);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .why-card-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .why-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ==============================================
+       SCREENSHOTS SECTION
+       ============================================== */
+    .screenshots {
+      background-color: var(--background);
+    }
+
+    .screenshots-scroll {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding-bottom: 16px;
+    }
+
+
+
+    .screenshot-item {
+      flex-shrink: 0;
+      width: 260px;
+      height: auto;
+      background: var(--surface);
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      scroll-snap-align: center;
+      transition: all var(--transition);
+      position: relative;
+    }
+
+    .screenshot-item:hover {
+      border-color: rgba(66, 133, 244, 0.3);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(66, 133, 244, 0.15);
+    }
+
+    .screenshot-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screenshot-label {
+      text-align: center;
+      padding: 14px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--surface);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* ==============================================
+       TRUST SECTION
+       ============================================== */
+    .trust {
+      background-color: var(--surface);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .trust-card {
+      text-align: center;
+      padding: 40px 32px;
+      background: var(--background);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition);
+    }
+
+    .trust-card:hover {
+      border-color: rgba(66, 133, 244, 0.2);
+    }
+
+    .trust-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      background: rgba(66, 133, 244, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trust-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--primary);
+    }
+
+    .trust-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .trust-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .trust-policy-link {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color var(--transition);
+    }
+
+    .trust-policy-link:hover {
+      color: var(--secondary);
+    }
+
+    /* ==============================================
+       CTA SECTION
+       ============================================== */
+    .cta {
+      background-color: var(--background);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 72px 40px;
+      background: linear-gradient(135deg, rgba(66, 133, 244, 0.08) 0%, rgba(123, 170, 247, 0.04) 100%);
+      border: 1px solid rgba(66, 133, 244, 0.15);
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(66, 133, 244, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-title {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .cta-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .cta .btn {
+      position: relative;
+    }
+
+    .cta-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-lg);
+      margin: 0 auto 24px;
+      box-shadow: 0 4px 20px rgba(66, 133, 244, 0.2);
+    }
+
+    /* ==============================================
+       FOOTER
+       ============================================== */
+    .footer {
+      background-color: var(--surface);
+      border-top: 1px solid var(--border-subtle);
+      padding: 48px 0 32px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand .logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .footer-brand-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .footer-link {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .footer-link:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ==============================================
+       SCROLL ANIMATIONS
+       ============================================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children */
+    .stagger-children .fade-up:nth-child(1) { transition-delay: 0.05s; }
+    .stagger-children .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .stagger-children .fade-up:nth-child(3) { transition-delay: 0.15s; }
+    .stagger-children .fade-up:nth-child(4) { transition-delay: 0.2s; }
+    .stagger-children .fade-up:nth-child(5) { transition-delay: 0.25s; }
+    .stagger-children .fade-up:nth-child(6) { transition-delay: 0.3s; }
+    .stagger-children .fade-up:nth-child(7) { transition-delay: 0.35s; }
+
+    /* ==============================================
+       RESPONSIVE STYLES
+       ============================================== */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .hero-description {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .hero-img {
+        width: 240px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .why-content {
+        text-align: center;
+      }
+
+      .why-content .section-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .why-list {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .section {
+        padding: 64px 0;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      /* Mobile nav overlay */
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--background);
+        padding: 24px;
+        gap: 16px;
+        z-index: 999;
+        animation: fadeIn 0.2s ease;
+      }
+
+      .nav-links.open .nav-link {
+        font-size: 1.1rem;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-subtle);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      .hero {
+        padding-top: 100px;
+        padding-bottom: 64px;
+      }
+
+      .hero-title {
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+      }
+
+      .hero-stats {
+        gap: 24px;
+      }
+
+      .hero-stat-value {
+        font-size: 1.25rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .screenshot-item {
+        width: 220px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cta-inner {
+        padding: 48px 24px;
+      }
+
+      .hero-img {
+        width: 200px;
+      }
+    }
+
+    /* Focus visible for accessibility */
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .fade-up {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
 
-<body data-theme="light">
-    <nav>
-        <div class="nav-container">
-            <a class="brand" href="#top" aria-label="Back to top">
-                <div class="brand-mark">JH</div>
-                <span>Jesser Hamdi</span>
-            </a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#experience">Experience</a>
-                <a href="#skills">Skills</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false">
-                <span id="themeIcon">🌙</span>
-                <span id="themeLabel">Dark</span>
-            </button>
-            <button class="mobile-trigger" id="mobileTrigger" type="button" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+<body>
+  <!-- ============================================
+       HEADER
+       ============================================ -->
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="SalahMate — Home">
+        <span class="logo-icon"><img src="images/salahMate.png" alt="SalahMate icon" width="36" height="36" /></span>
+        <span>SalahMate</span>
+      </a>
 
-    <div id="mouse-light"></div>
-    <div class="ambient" aria-hidden="true">
-        <span class="light"></span>
-        <span class="light"></span>
-        <span class="light"></span>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#why" class="nav-link">Why SalahMate</a></li>
+          <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
+          <li><a href="#trust" class="nav-link">Trust</a></li>
+        </ul>
+
+        <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
+           class="btn btn-primary"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Download SalahMate on Google Play">
+          <!-- Google Play icon -->
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.2 12l2.498-2.492zM5.864 3.658L16.8 9.99l-2.302 2.302-8.634-8.634z"/>
+          </svg>
+          Download
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </nav>
     </div>
+  </header>
 
-    <main>
-        <section class="hero" id="top">
-            <div class="hero-inner reveal">
-                <div class="hero-badge">
-                    <span>Open to 2025 PFE internship opportunities</span>
-                </div>
-                <h1 id="heroTitle"><span id="typed-text"></span><span id="cursor">|</span></h1>
-                <p>I am Jesser Hamdi, a software engineering student at Université de Carthage. My focus is mobile-first
-                    experiences—shipping SalahMate, PlantCare, and collaborative experiments that blend UX, realtime
-                    data, and automation.</p>
-                <div class="hero-actions">
-                    <a class="btn btn-primary" href="cv.pdf" download>Download CV</a>
-                    <a class="btn btn-neutral"
-                        href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-                        target="_blank" rel="noopener">SalahMate on Play Store</a>
-                    <a class="btn btn-outline" href="mailto:jasser.hamdi@fsb.ucar.tn">Let’s collaborate</a>
-                </div>
-                <div class="hero-tags">
-                    <span class="chip">Flutter</span>
-                    <span class="chip">Firebase</span>
-                    <span class="chip">TensorFlow Lite</span>
-                    <span class="chip">IoT &amp; BeagleBone</span>
-                    <span class="chip">CI/CD &amp; Automation</span>
-                    <span class="chip">Spring Boot</span>
-                    <span class="chip">Unity Multiplayer</span>
-                </div>
+  <main>
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge fade-up">
+            <span class="hero-badge-dot" aria-hidden="true"></span>
+            Available on Android
+          </div>
+
+          <h1 class="hero-title fade-up">
+            Your Companion for<br/>
+            <span class="highlight">Salah &amp; Quran</span>
+          </h1>
+
+          <p class="hero-description fade-up">
+            A beautifully simple Islamic app with Quran recitations, Tafsir, accurate prayer times, Qibla direction, and daily Adhkar — designed for focus and khushu'.
+          </p>
+
+          <div class="hero-actions fade-up">
+            <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
+               class="btn btn-primary btn-large"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Download SalahMate on Google Play">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.2 12l2.498-2.492zM5.864 3.658L16.8 9.99l-2.302 2.302-8.634-8.634z"/>
+              </svg>
+              Download on Google Play
+            </a>
+          </div>
+
+          <div class="hero-stats fade-up">
+            <div>
+              <div class="hero-stat-value">7+</div>
+              <div class="hero-stat-label">Core Features</div>
             </div>
-        </section>
-
-        <section id="about">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <h2>About</h2>
-                    <p>Entrepreneurial developer blending mobile, backend, and connected hardware to solve practical
-                        problems for communities and teams.</p>
-                </div>
-                <div class="about-wrap">
-                    <article class="card reveal">
-                        <h3>A product-minded Flutter engineer</h3>
-                        <p>I build end-to-end mobile solutions—architecture, UI, deployment, and automation. My projects
-                            combine delightful interfaces, reliable data layers, and clear feedback loops.</p>
-                        <ul class="stat-list">
-                            <li class="stat"><span>• Published Flutter apps on Google Play</span><strong class="counter"
-                                    data-target="2">0</strong></li>
-                            <li class="stat"><span>• Multilingual experiences shipped</span><strong class="counter"
-                                    data-target="3">0</strong></li>
-                            <li class="stat"><span>• Engineering degree in progress (FSB, Université de
-                                    Carthage)</span><strong class="counter" data-target="2026">2023</strong></li>
-                        </ul>
-                    </article>
-                    <article class="card reveal">
-                        <h3>What I focus on</h3>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Mobile products that balance UX polish with performance, including
-                                    custom theming, accessibility, and offline-first patterns.</span></li>
-                            <li><span>▹</span><span>IoT dashboards that surface sensor data and alerts using Firebase,
-                                    MQTT, and BeagleBone hardware.</span></li>
-                            <li><span>▹</span><span>Applied AI features, such as TensorFlow Lite models for computer
-                                    vision and smart media pipelines for Quran audio in SalahMate.</span></li>
-                            <li><span>▹</span><span>Analytics-informed iteration with Power BI dashboards, event
-                                    tracking, and automation to capture user impact.</span></li>
-                        </ul>
-                    </article>
-                </div>
+            <div>
+              <div class="hero-stat-value">100%</div>
+              <div class="hero-stat-label">Free to Use</div>
             </div>
-        </section>
-
-        <section id="projects">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <h2>Signature Projects</h2>
-                    <p>Highlighted releases and open-source work from my GitHub (<a href="https://github.com/LICHG4E"
-                            target="_blank" rel="noopener">LICHG4E</a>) and Google Play developer accounts.</p>
-                </div>
-                <div class="project-grid">
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Mobile · Production</span>
-                            <h3>SalahMate — comprehensive Islamic companion app.</h3>
-                            <p>Delivers accurate prayer times, Quran recitation with offline caching, adhkar, Qibla
-                                compass, Hijri calendar, and adaptive light/dark/black themes with battery-friendly
-                                background services.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Multi-language experience (Arabic, English, French) with responsive
-                                    typography for phones and tablets.</span></li>
-                            <li><span>▹</span><span>Custom notification engine powering prayer reminders, fasting
-                                    trackers, and smart Quran playback queues.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">App Store Ops</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-                                target="_blank" rel="noopener">Play Store →</a>
-                            <a href="https://github.com/LICHG4E/salahMate_quran_audio" target="_blank"
-                                rel="noopener">Audio pipeline repo →</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">IoT · AI</span>
-                            <h3>PlantCare — smart greenhouse telemetry &amp; vision.</h3>
-                            <p>End-to-end platform that pairs a BeagleBone-based IoT gateway with a Flutter app for live
-                                greenhouse monitoring, remote controls, and TensorFlow Lite disease detection.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Realtime dashboards for humidity, soil moisture, and light with
-                                    configurable alert thresholds.</span></li>
-                            <li><span>▹</span><span>Image capture pipeline that flags plant health issues directly from
-                                    growers’ phones.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Firebase RTDB</span>
-                            <span class="chip">TensorFlow Lite</span>
-                            <span class="chip">BeagleBone</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/LICHG4E/iot_v3" target="_blank" rel="noopener">GitHub case study
-                                →</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Mobile · Gamified Learning</span>
-                            <h3>Flag Frenzy — geography gamification with Supabase.</h3>
-                            <p>Mobile game with challenge ladders, daily streak mechanics, in-game currency, and
-                                federated login to keep learners engaged.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Progression engine that adapts difficulty and rewards to player
-                                    streaks.</span></li>
-                            <li><span>▹</span><span>Cross-device sync using Supabase Auth and row-level security.</span>
-                            </li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Supabase</span>
-                            <span class="chip">Google Auth</span>
-                            <span class="chip">RevenueOps</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/LICHG4E/flag_frenzy_general" target="_blank"
-                                rel="noopener">GitHub →</a>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="subheading">Collaborations &amp; Supporting Work</div>
-                <div class="project-grid">
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Collaboration · Java</span>
-                            <h3>Netflixy — cinematic discovery experience.</h3>
-                            <p>Desktop application in Java using Oracle database for storing videos, actors, etc., with
-                                bespoke UI components.</p>
-                        </div>
-                        <div class="project-meta">
-                            <span class="chip">Java</span>
-                            <span class="chip">Oracle</span>
-                            <span class="chip">Custom UI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="mailto:jasser.hamdi@fsb.ucar.tn?subject=Netflixy%20case%20study">Request demo deck
-                                →</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Mobile · Streaming</span>
-                            <h3>jwatch_v2 — Flutter streaming hub.</h3>
-                            <p>A personal Flutter app that aggregates anime, TV, and film sources into a single catalog
-                                with custom playback controls and progress syncing.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Unified search across multiple streaming APIs with smart fallback
-                                    when providers throttle.</span></li>
-                            <li><span>▹</span><span>In-app player overlays for subtitles, episode queues, and casting
-                                    hooks.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Dart</span>
-                            <span class="chip">Streaming APIs</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="mailto:jasser.hamdi@fsb.ucar.tn?subject=jwatch_v2%20demo">Request test build →</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Data Ops</span>
-                            <h3>Sagemcom BI pipelines</h3>
-                            <p>ETL workflows and Power BI dashboards created during my 2024 internship to automate
-                                industrial reporting and forecasting.</p>
-                        </div>
-                        <div class="project-meta">
-                            <span class="chip">Python</span>
-                            <span class="chip">SQL Server</span>
-                            <span class="chip">Power BI</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#experience">Experience details →</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Backend · Spring Boot</span>
-                            <h3>RealEstateAgency_back — property APIs.</h3>
-                            <p>Spring Boot service that manages property listings, appointments, and agent workflows
-                                with secure authentication and documentation.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Modular architecture with layered services, DTO validation, and
-                                    Swagger docs for quick onboarding.</span></li>
-                            <li><span>▹</span><span>Role-based security and JWT refreshing to keep brokers and admins in
-                                    their lanes.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Spring Boot</span>
-                            <span class="chip">REST</span>
-                            <span class="chip">JWT</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/LICHG4E/RealEstateAgency_back" target="_blank"
-                                rel="noopener">GitHub →</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Game · Multiplayer</span>
-                            <h3>Unity 4-player game "Dots Fighting in Space"</h3>
-                            <p>Unity game featuring 4-player multiplayer combat in space, with a Java-based server
-                                handling matchmaking and game state.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Space-themed battles with dots as characters in zero-gravity
-                                    combat.</span></li>
-                            <li><span>▹</span><span>Java server manages multiplayer sessions and ensures synchronized
-                                    gameplay.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Unity</span>
-                            <span class="chip">Java</span>
-                            <span class="chip">Netcode</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="mailto:jasser.hamdi@fsb.ucar.tn?subject=Unity%20multiplayer%20prototype">Request
-                                playtest invite →</a>
-                        </div>
-                    </article>
-                </div>
+            <div>
+              <div class="hero-stat-value">Offline</div>
+              <div class="hero-stat-label">Ready</div>
             </div>
-        </section>
+          </div>
+        </div>
 
-        <section id="experience">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <h2>Experience</h2>
-                    <p>Practical roles and long-running initiatives that shaped how I deliver reliable software.</p>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item reveal">
-                        <div class="timeline-marker" aria-hidden="true"></div>
-                        <article class="timeline-card">
-                            <header>
-                                <div>
-                                    <h3>Summer Data Engineering Intern</h3>
-                                    <span>SAGEMCOM · Tunis, Tunisia</span>
-                                </div>
-                                <span>July 2024</span>
-                            </header>
-                            <ul>
-                                <li>Designed ETL pipelines to consolidate production data into actionable aggregates
-                                    inside SQL Server.</li>
-                                <li>Automated Power BI dashboards fed by Python (Pandas) scripts to surface KPIs for
-                                    operations teams.</li>
-                                <li>Documented workflows and trained stakeholders, reducing manual reporting time each
-                                    week.</li>
-                            </ul>
-                        </article>
-                    </div>
+        <div class="hero-visual fade-up">
+          <img src="images/1_home.webp"
+               alt="SalahMate home screen showing prayer times and quick access features"
+               class="hero-img"
+               loading="eager"
+               width="300" />
+        </div>
+      </div>
+    </section>
 
-                    <div class="timeline-item reveal">
-                        <div class="timeline-marker" aria-hidden="true"></div>
-                        <article class="timeline-card">
-                            <header>
-                                <div>
-                                    <h3>Flutter Product Developer</h3>
-                                    <span>Self-initiated projects</span>
-                                </div>
-                                <span>2022 – Present</span>
-                            </header>
-                            <ul>
-                                <li>Launched and maintained multiple mobile apps with Google Play releases and CI/CD
-                                    automation.</li>
-                                <li>Built dashboards and alerting workflows that surface IoT sensor data to growers and
-                                    testers.</li>
-                                <li>Embedded ML models, monetization, analytics, and growth tactics to support real user
-                                    needs.</li>
-                            </ul>
-                        </article>
-                    </div>
+    <!-- ============================================
+         FEATURES SECTION
+         ============================================ -->
+    <section class="features section" id="features">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="section-label">Features</span>
+          <h2 class="section-title">Everything You Need,<br/>Nothing You Don't</h2>
+          <p class="section-subtitle">
+            SalahMate brings together the essential tools every Muslim needs — thoughtfully designed, distraction-free, and ready when you are.
+          </p>
+        </div>
+
+        <div class="features-grid stagger-children">
+          <!-- Feature 1: Quran -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">📖</div>
+            <h3 class="feature-title">Quran with Recitations</h3>
+            <p class="feature-description">
+              Read the Holy Quran with multiple recitations and ayah-by-ayah audio playback for a deeply immersive experience.
+            </p>
+          </div>
+
+          <!-- Feature 2: Tafsir -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">📜</div>
+            <h3 class="feature-title">Tafsir &amp; Asbab al-Nuzul</h3>
+            <p class="feature-description">
+              Understand the meaning behind every verse with detailed Tafsir and the reasons of revelation.
+            </p>
+          </div>
+
+          <!-- Feature 3: Prayer Times -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">🕌</div>
+            <h3 class="feature-title">Accurate Prayer Times</h3>
+            <p class="feature-description">
+              Get precise prayer time calculations based on your location, so you never miss a Salah.
+            </p>
+          </div>
+
+          <!-- Feature 4: Qibla -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">🧭</div>
+            <h3 class="feature-title">Qibla Finder</h3>
+            <p class="feature-description">
+              Find the exact direction of the Qibla wherever you are with a smooth, reliable compass.
+            </p>
+          </div>
+
+          <!-- Feature 5: Adhkar -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">🤲</div>
+            <h3 class="feature-title">Daily Adhkar</h3>
+            <p class="feature-description">
+              Morning and evening remembrances at your fingertips — build a consistent daily habit of dhikr.
+            </p>
+          </div>
+
+          <!-- Feature 6: Offline -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">📡</div>
+            <h3 class="feature-title">Offline Support</h3>
+            <p class="feature-description">
+              Access core features without an internet connection — perfect for travel, the masjid, or anywhere.
+            </p>
+          </div>
+
+          <!-- Feature 7: Clean Interface -->
+          <div class="feature-card fade-up">
+            <div class="feature-icon" aria-hidden="true">✨</div>
+            <h3 class="feature-title">Clean Interface</h3>
+            <p class="feature-description">
+              A minimal, distraction-free design that helps you focus on what matters — your ibadah.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         WHY SALAHMATE SECTION
+         ============================================ -->
+    <section class="why-section section" id="why">
+      <div class="container">
+        <div class="why-grid">
+          <div class="why-content">
+            <span class="section-label fade-up">Why SalahMate</span>
+            <h2 class="section-title fade-up">Built Different.<br/>Built with Care.</h2>
+            <p class="section-subtitle fade-up">
+              SalahMate isn't just another Islamic app. It's thoughtfully crafted to give you 
+              exactly what you need — without the clutter, without the noise.
+            </p>
+
+            <div class="why-list">
+              <div class="why-item fade-up">
+                <div class="why-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
                 </div>
+                <div class="why-item-text">
+                  <h4>Lightweight &amp; Fast</h4>
+                  <p>No bloat, no lag. SalahMate launches quickly and runs smoothly on any device.</p>
+                </div>
+              </div>
+
+              <div class="why-item fade-up">
+                <div class="why-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M8 12l2 2 4-4"/>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4>No Unnecessary Clutter</h4>
+                  <p>Every screen serves a purpose. We removed the distractions so you can focus on ibadah.</p>
+                </div>
+              </div>
+
+              <div class="why-item fade-up">
+                <div class="why-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4>Built with Care</h4>
+                  <p>Designed with Islamic principles in mind — respectful, accurate, and made with sincerity.</p>
+                </div>
+              </div>
+
+              <div class="why-item fade-up">
+                <div class="why-item-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <div class="why-item-text">
+                  <h4>Designed for Khushu'</h4>
+                  <p>A calm, focused environment that helps you connect deeply with your prayers and recitation.</p>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <section id="skills">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <h2>Skills &amp; Tech Stack</h2>
-                    <p>Focused on tools that I rely on weekly when architecting, shipping, and iterating on products.
-                    </p>
+          <div class="why-visual fade-up">
+            <div class="why-card-stack">
+              <div class="why-card">
+                <div class="why-card-icon" aria-hidden="true">⚡</div>
+                <div>
+                  <div class="why-card-title">Instant Launch</div>
+                  <div class="why-card-desc">Opens in under a second</div>
                 </div>
-                <div class="skill-grid">
-                    <article class="skill-card reveal">
-                        <h3>Product-grade Mobile</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Flutter · Dart · Provider · Flutter animations</span></li>
-                            <li><span>▹</span><span>Android Studio, Firebase App Distribution, Play Console ops</span>
-                            </li>
-                            <li><span>▹</span><span>Accessibility, responsive layouts, advanced theming</span></li>
-                        </ul>
-                    </article>
-
-                    <article class="skill-card reveal">
-                        <h3>Connected Systems</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Firebase (Auth, Firestore, RTDB, Cloud Messaging)</span></li>
-                            <li><span>▹</span><span>MQTT, REST backends, Spring Boot, Express.js</span></li>
-                            <li><span>▹</span><span>BeagleBone</span></li>
-                        </ul>
-                    </article>
-
-                    <article class="skill-card reveal">
-                        <h3>AI &amp; Data</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>TensorFlow Lite, on-device inference pipelines</span></li>
-                            <li><span>▹</span><span>Python (Pandas, NumPy) for ETL, reporting, automation</span></li>
-                            <li><span>▹</span><span>Power BI, SQL Server, Supabase, PostgreSQL</span></li>
-                        </ul>
-                    </article>
-
-                    <article class="skill-card reveal">
-                        <h3>Collaboration</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Git &amp; GitHub Actions, issue triage, code reviews</span></li>
-                            <li><span>▹</span><span>Figma prototypes, design tokens, UX writing</span></li>
-                            <li><span>▹</span><span>Documentation (Markdown, LaTeX), English &amp; French
-                                    communication</span></li>
-                        </ul>
-                    </article>
+              </div>
+              <div class="why-card">
+                <div class="why-card-icon" aria-hidden="true">🎯</div>
+                <div>
+                  <div class="why-card-title">Purpose-Driven</div>
+                  <div class="why-card-desc">Every feature serves your deen</div>
                 </div>
+              </div>
+              <div class="why-card">
+                <div class="why-card-icon" aria-hidden="true">🔒</div>
+                <div>
+                  <div class="why-card-title">Privacy First</div>
+                  <div class="why-card-desc">Your data stays yours</div>
+                </div>
+              </div>
+              <div class="why-card">
+                <div class="why-card-icon" aria-hidden="true">💎</div>
+                <div>
+                  <div class="why-card-title">Completely Free</div>
+                  <div class="why-card-desc">No premium walls, no hidden fees</div>
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="education">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <h2>Education</h2>
-                    <p>Engineering fundamentals and project-based learning that ground my technical decisions.</p>
-                </div>
-                <article class="card education-card reveal">
-                    <strong>Engineering Degree in Software Engineering</strong>
-                    <span>Faculté des Sciences de Bizerte, Université de Carthage</span>
-                    <span class="chip">Expected 2026</span>
-                    <p>Coursework across distributed systems, embedded programming, and advanced algorithms supporting
-                        my applied project work.</p>
-                </article>
+    <!-- ============================================
+         SCREENSHOTS SECTION
+         ============================================ -->
+    <section class="screenshots section" id="screenshots">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="section-label">Screenshots</span>
+          <h2 class="section-title">See SalahMate in Action</h2>
+          <p class="section-subtitle">
+            A clean, focused design that puts your ibadah front and center.
+          </p>
+        </div>
+
+        <div class="screenshots-scroll stagger-children">
+          <div class="screenshot-item fade-up">
+            <img src="images/1_home.webp" alt="SalahMate home screen" loading="lazy" width="260" />
+            <div class="screenshot-label">Home</div>
+          </div>
+          <div class="screenshot-item fade-up">
+            <img src="images/2_quran_page.webp" alt="SalahMate Quran surah list" loading="lazy" width="260" />
+            <div class="screenshot-label">Quran</div>
+          </div>
+          <div class="screenshot-item fade-up">
+            <img src="images/3_quran_viewer.webp" alt="SalahMate Quran reader view" loading="lazy" width="260" />
+            <div class="screenshot-label">Quran Reader</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         TRUST SECTION
+         ============================================ -->
+    <section class="trust section" id="trust">
+      <div class="container">
+        <div class="section-header fade-up">
+          <span class="section-label">Trust &amp; Privacy</span>
+          <h2 class="section-title">Your Privacy Matters</h2>
+          <p class="section-subtitle">
+            SalahMate is built with integrity — respecting your data, your time, and your worship.
+          </p>
+        </div>
+
+        <div class="trust-grid stagger-children">
+          <div class="trust-card fade-up">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
             </div>
-        </section>
+            <h3 class="trust-title">Privacy-Focused</h3>
+            <p class="trust-description">
+              We respect your privacy. SalahMate does not track, sell, or misuse your personal data in any way.
+              <br/><br/>
+              <a href="https://jesser.me/SalahMate_privacy_policy/Privacy%20Policy%20for%20SalahMate.html"
+                 class="trust-policy-link">Read our Privacy Policy &rarr;</a>
+            </p>
+          </div>
 
-        <section id="contact">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <h2>Let’s Collaborate</h2>
-                    <p>Share your idea, internship brief, or a complex integration challenge—happy to explore how I can
-                        help.</p>
-                </div>
-                <div class="contact-grid">
-                    <article class="contact-card reveal">
-                        <small>Email</small>
-                        <a href="mailto:jasser.hamdi@fsb.ucar.tn">jasser.hamdi@fsb.ucar.tn</a>
-                        <p>Best for project briefs, internship opportunities, and partnership ideas.</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>LinkedIn</small>
-                        <a href="https://linkedin.com/in/jesser-hamdi-5b071a238" target="_blank"
-                            rel="noopener">linkedin.com/in/jesser-hamdi-5b071a238</a>
-                        <p>Let’s connect for professional updates and community collaborations.</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>GitHub</small>
-                        <a href="https://github.com/LICHG4E" target="_blank" rel="noopener">github.com/LICHG4E</a>
-                        <p>Dive into commits, documentation, and roadmap discussions for my public work.</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>Phone</small>
-                        <a href="tel:+21652522372">+216 52 522 372</a>
-                        <p>Call or drop a message anytime—you’ll hear back soon.</p>
-                    </article>
-                </div>
+          <div class="trust-card fade-up">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
             </div>
-        </section>
-    </main>
+            <h3 class="trust-title">Minimal Data Collection</h3>
+            <p class="trust-description">
+              Only location data is used — solely for prayer times and Qibla direction. Nothing extra, nothing hidden.
+            </p>
+          </div>
 
-    <footer class="footer">
-        <p>© <span id="year"></span> Jesser Hamdi. Designed and coded in Flutter spirit.</p>
-        <span>Built with love for purposeful technology.</span>
-    </footer>
+          <div class="trust-card fade-up">
+            <div class="trust-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M8 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="trust-title">Reliable Calculations</h3>
+            <p class="trust-description">
+              Prayer times are calculated with trusted, well-known algorithms to ensure accuracy you can depend on.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        const body = document.body;
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeLabel = document.getElementById('themeLabel');
-        const mobileTrigger = document.getElementById('mobileTrigger');
-        const navLinks = document.getElementById('navLinks');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    <!-- ============================================
+         CTA SECTION
+         ============================================ -->
+    <section class="cta section" id="download">
+      <div class="container">
+        <div class="cta-inner fade-up">
+          <img src="images/salahMate.png" alt="SalahMate" class="cta-icon" width="72" height="72" />
+          <h2 class="cta-title">Strengthen Your Connection<br/>with Salah Today</h2>
+          <p class="cta-subtitle">
+            Join thousands of Muslims who use SalahMate for a more focused, meaningful worship experience.
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
+             class="btn btn-primary btn-large"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Download SalahMate on Google Play">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.2 12l2.498-2.492zM5.864 3.658L16.8 9.99l-2.302 2.302-8.634-8.634z"/>
+            </svg>
+            Download on Google Play
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        const applyTheme = (theme) => {
-            body.setAttribute('data-theme', theme);
-            const isDark = theme === 'dark';
-            themeToggle?.setAttribute('aria-pressed', String(isDark));
-            if (themeIcon) {
-                themeIcon.textContent = isDark ? '☀️' : '🌙';
-            }
-            if (themeLabel) {
-                themeLabel.textContent = isDark ? 'Light' : 'Dark';
-            }
-        };
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-icon"><img src="images/salahMate.png" alt="SalahMate icon" width="32" height="32" /></span>
+          <span class="footer-brand-name">SalahMate</span>
+        </div>
 
-        const storedTheme = localStorage.getItem('theme-preference');
-        if (storedTheme) {
-            applyTheme(storedTheme);
-        } else if (prefersDark.matches) {
-            applyTheme('dark');
-        }
+        <div class="footer-links">
+          <a href="mailto:jhmobileapps.dev@gmail.com" class="footer-link">Contact</a>
+          <a href="https://jesser.me/SalahMate_privacy_policy/Privacy%20Policy%20for%20SalahMate.html"
+             class="footer-link">Privacy Policy</a>
+          <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
+             class="footer-link"
+             target="_blank"
+             rel="noopener noreferrer">Google Play</a>
+        </div>
+      </div>
 
-        themeToggle?.addEventListener('click', () => {
-            const current = body.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            applyTheme(next);
-            localStorage.setItem('theme-preference', next);
+      <div class="footer-bottom">
+        &copy; 2026 SalahMate. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT — Minimal, no dependencies
+       ============================================ -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* ----------------------------------------
+         Mobile Menu Toggle
+         ---------------------------------------- */
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinks = document.getElementById('navLinks');
+
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function () {
+          const isOpen = navLinks.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', isOpen);
         });
 
-        prefersDark.addEventListener('change', (event) => {
-            if (!localStorage.getItem('theme-preference')) {
-                applyTheme(event.matches ? 'dark' : 'light');
-            }
+        // Close mobile menu when a nav link is clicked
+        navLinks.querySelectorAll('.nav-link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            navLinks.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
         });
+      }
 
-        mobileTrigger?.addEventListener('click', () => {
-            navLinks?.classList.toggle('open');
-        });
+      /* ----------------------------------------
+         Scroll-triggered Fade-in Animations
+         Uses IntersectionObserver for performance
+         ---------------------------------------- */
+      var fadeElements = document.querySelectorAll('.fade-up');
 
-        navLinks?.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => navLinks.classList.remove('open'));
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener('click', (event) => {
-                const targetId = anchor.getAttribute('href');
-                if (!targetId || targetId.length === 1) {
-                    return;
-                }
-                event.preventDefault();
-                const target = document.querySelector(targetId);
-                target?.scrollIntoView({ behavior: 'smooth' });
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
             });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px',
+          }
+        );
+
+        fadeElements.forEach(function (el) {
+          observer.observe(el);
         });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // Add stagger delay for grid items
-                    const parent = entry.target.parentNode;
-                    if (parent && (parent.classList.contains('project-grid') || parent.classList.contains('skill-grid') || parent.classList.contains('contact-grid'))) {
-                        const siblings = Array.from(parent.children).filter(child => child.classList.contains('reveal'));
-                        const index = siblings.indexOf(entry.target);
-                        entry.target.style.animationDelay = `${index * 0.2}s`;
-                    }
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.14, rootMargin: '0px 0px -12%' });
-
-        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-
-        // Mouse light follower
-        const mouseLight = document.getElementById('mouse-light');
-        document.addEventListener('mousemove', (e) => {
-            mouseLight.style.left = (e.clientX - 200) + 'px';
-            mouseLight.style.top = (e.clientY - 200) + 'px';
+      } else {
+        // Fallback: show all elements immediately
+        fadeElements.forEach(function (el) {
+          el.classList.add('visible');
         });
+      }
 
-        // Typing animation for hero title
-        const heroTitle = document.getElementById('heroTitle');
-        const typedText = document.getElementById('typed-text');
-        const cursor = document.getElementById('cursor');
-        const fullText = "Building polished Flutter apps with tight visuals and dependable data flows.";
-        let index = 0;
-        const typeSpeed = 50; // ms per character
+      /* ----------------------------------------
+         Sticky Header — subtle background on scroll
+         ---------------------------------------- */
+      var header = document.querySelector('.header');
+      var scrollThreshold = 10;
 
-        function typeWriter() {
-            if (index < fullText.length) {
-                typedText.textContent += fullText.charAt(index);
-                index++;
-                setTimeout(typeWriter, typeSpeed);
-            } else {
-                // Stop cursor blinking
-                heroTitle.classList.add('typing-done');
-            }
-        }
-
-        // Start typing after a short delay
-        setTimeout(typeWriter, 1000);
-
-        // Counter animation
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.counter');
-                    counters.forEach((counter) => {
-                        const target = +counter.dataset.target;
-                        const duration = 1500; // ms
-                        const step = target / (duration / 16); // 60fps
-                        let current = 0;
-                        const update = () => {
-                            current += step;
-                            if (current < target) {
-                                counter.textContent = Math.floor(current);
-                                requestAnimationFrame(update);
-                            } else {
-                                counter.textContent = target;
-                            }
-                        };
-                        update();
-                    });
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.card').forEach((card) => counterObserver.observe(card));
-
-        const year = document.getElementById('year');
-        year.textContent = new Date().getFullYear();
-    </script>
+      window.addEventListener(
+        'scroll',
+        function () {
+          if (window.scrollY > scrollThreshold) {
+            header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+          } else {
+            header.style.backgroundColor = 'rgba(18, 18, 18, 0.85)';
+          }
+        },
+        { passive: true }
+      );
+    })();
+  </script>
 </body>
-
 </html>
