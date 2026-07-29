@@ -1,1556 +1,1448 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
+
 <head>
-  <!-- ============================================
-       SalahMate — Official Homepage
-       All-in-one Islamic Companion App
-       ============================================ -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SalahMate — Your All-in-One Islamic Companion App</title>
-
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="SalahMate is a lightweight, distraction-free Islamic companion app featuring Quran reading, multiple recitations, Tafsir, prayer times, Qibla direction, daily Adhkar, and offline support." />
-  <meta name="keywords" content="SalahMate, Quran app, prayer times, Islamic app, Qibla, Adhkar, Tafsir, Muslim app, Salah, Android" />
-  <meta name="author" content="GroveReaper" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#121212" />
-
-  <!-- Open Graph Tags -->
-  <meta property="og:title" content="SalahMate — Your All-in-One Islamic Companion App" />
-  <meta property="og:description" content="Quran, Prayer Times, Qibla, Adhkar & more — beautifully simple, distraction-free, and built for focus." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jesser.me/SalahMate_privacy_policy/" />
-  <meta property="og:image" content="images/salahMate.png" />
-  <meta property="og:locale" content="en_US" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="SalahMate — Your All-in-One Islamic Companion App" />
-  <meta name="twitter:description" content="Quran, Prayer Times, Qibla, Adhkar & more — beautifully simple." />
-  <meta name="twitter:image" content="images/salahMate.png" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="images/salahMate.png" type="image/png" />
-  <link rel="apple-touch-icon" href="images/salahMate.png" />
-
-  <!-- Google Fonts — Inter for clean modern typography -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ==============================================
-       CSS RESET & BASE STYLES
-       ============================================== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #121212;
-      color: #FFFFFF;
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    ul, ol {
-      list-style: none;
-    }
-
-    /* ==============================================
-       CSS CUSTOM PROPERTIES
-       ============================================== */
-    :root {
-      --primary: #4285F4;
-      --primary-hover: #1A73E8;
-      --secondary: #7BAAF7;
-      --secondary-hover: #5B98F3;
-      --error: #EF5350;
-      --error-hover: #E53935;
-      --surface: #202124;
-      --background: #121212;
-      --text-on-primary: #FFFFFF;
-      --text-primary-light: #202124;
-      --pure-black: #000000;
-      --text-muted: #9AA0A6;
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 24px;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-      --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
-      --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      --max-width: 1200px;
-    }
-
-    /* ==============================================
-       UTILITY CLASSES
-       ============================================== */
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .section {
-      padding: 96px 0;
-    }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      line-height: 1.7;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .section-header .section-subtitle {
-      margin: 0 auto;
-    }
-
-    /* ==============================================
-       BUTTONS
-       ============================================== */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all var(--transition);
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background-color: var(--primary);
-      color: var(--text-on-primary);
-      box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus-visible {
-      background-color: var(--primary-hover);
-      box-shadow: 0 4px 16px rgba(66, 133, 244, 0.45);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-
-    .btn-outline {
-      background-color: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover,
-    .btn-outline:focus-visible {
-      background-color: rgba(66, 133, 244, 0.1);
-    }
-
-    .btn svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-
-    .btn-large {
-      padding: 16px 36px;
-      font-size: 1.1rem;
-      border-radius: var(--radius-md);
-    }
-
-    /* ==============================================
-       HEADER / NAVIGATION
-       ============================================== */
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background-color: rgba(18, 18, 18, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: background-color var(--transition);
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 64px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .logo-icon img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-    }
-
-    .nav-link {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      transition: color var(--transition);
-      position: relative;
-    }
-
-    .nav-link:hover,
-    .nav-link:focus-visible {
-      color: #FFFFFF;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--primary);
-      transition: width var(--transition);
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .header .btn {
-      padding: 10px 20px;
-      font-size: 0.875rem;
-    }
-
-    /* Mobile menu toggle */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      color: #FFFFFF;
-    }
-
-    .menu-toggle svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    /* ==============================================
-       HERO SECTION
-       ============================================== */
-    .hero {
-      padding-top: 140px;
-      padding-bottom: 100px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Subtle radial glow behind hero */
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(66, 133, 244, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-    }
-
-    .hero-content {
-      max-width: 540px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background-color: rgba(66, 133, 244, 0.12);
-      border: 1px solid rgba(66, 133, 244, 0.2);
-      border-radius: 100px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--secondary);
-      margin-bottom: 24px;
-    }
-
-    .hero-badge-dot {
-      width: 6px;
-      height: 6px;
-      background-color: var(--primary);
-      border-radius: 50%;
-    }
-
-    .hero-title {
-      font-size: clamp(2.25rem, 5vw, 3.25rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-title .highlight {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-description {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 36px;
-      max-width: 460px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .hero-stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #FFFFFF;
-    }
-
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* Phone mockup placeholder */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .hero-img {
-      width: 300px;
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 80px rgba(66, 133, 244, 0.1);
-      display: block;
-    }
-
-    /* ==============================================
-       FEATURES SECTION
-       ============================================== */
-    .features {
-      background-color: var(--background);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .feature-card {
-      background-color: var(--surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      transition: all var(--transition);
-    }
-
-    .feature-card:hover {
-      border-color: rgba(66, 133, 244, 0.2);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(66, 133, 244, 0.1);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 1.3rem;
-    }
-
-    .feature-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #FFFFFF;
-    }
-
-    .feature-description {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ==============================================
-       WHY SALAHMATE SECTION
-       ============================================== */
-    .why-section {
-      background-color: var(--surface);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .why-content .section-subtitle {
-      margin-bottom: 36px;
-    }
-
-    .why-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .why-item {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .why-item-icon {
-      width: 40px;
-      height: 40px;
-      min-width: 40px;
-      background: rgba(66, 133, 244, 0.1);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-    }
-
-    .why-item-icon svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .why-item-text h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .why-item-text p {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .why-visual {
-      display: flex;
-      justify-content: center;
-    }
-
-    .why-card-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .why-card {
-      background-color: var(--background);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      transition: all var(--transition);
-    }
-
-    .why-card:hover {
-      border-color: rgba(66, 133, 244, 0.2);
-    }
-
-    .why-card-icon {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      background: rgba(66, 133, 244, 0.1);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-    }
-
-    .why-card-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-
-    .why-card-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    /* ==============================================
-       SCREENSHOTS SECTION
-       ============================================== */
-    .screenshots {
-      background-color: var(--background);
-    }
-
-    .screenshots-scroll {
-      display: flex;
-      gap: 28px;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding-bottom: 16px;
-    }
-
-
-
-    .screenshot-item {
-      flex-shrink: 0;
-      width: 260px;
-      height: auto;
-      background: var(--surface);
-      border: 2px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      scroll-snap-align: center;
-      transition: all var(--transition);
-      position: relative;
-    }
-
-    .screenshot-item:hover {
-      border-color: rgba(66, 133, 244, 0.3);
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 12px 40px rgba(66, 133, 244, 0.15);
-    }
-
-    .screenshot-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .screenshot-label {
-      text-align: center;
-      padding: 14px 12px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: var(--surface);
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    /* ==============================================
-       TRUST SECTION
-       ============================================== */
-    .trust {
-      background-color: var(--surface);
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .trust-card {
-      text-align: center;
-      padding: 40px 32px;
-      background: var(--background);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      transition: all var(--transition);
-    }
-
-    .trust-card:hover {
-      border-color: rgba(66, 133, 244, 0.2);
-    }
-
-    .trust-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 20px;
-      background: rgba(66, 133, 244, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .trust-icon svg {
-      width: 28px;
-      height: 28px;
-      color: var(--primary);
-    }
-
-    .trust-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .trust-description {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .trust-policy-link {
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 0.875rem;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      transition: color var(--transition);
-    }
-
-    .trust-policy-link:hover {
-      color: var(--secondary);
-    }
-
-    /* ==============================================
-       CTA SECTION
-       ============================================== */
-    .cta {
-      background-color: var(--background);
-      text-align: center;
-    }
-
-    .cta-inner {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 72px 40px;
-      background: linear-gradient(135deg, rgba(66, 133, 244, 0.08) 0%, rgba(123, 170, 247, 0.04) 100%);
-      border: 1px solid rgba(66, 133, 244, 0.15);
-      border-radius: var(--radius-xl);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-inner::before {
-      content: '';
-      position: absolute;
-      top: -100px;
-      right: -100px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(66, 133, 244, 0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .cta-title {
-      font-size: clamp(1.5rem, 3.5vw, 2rem);
-      font-weight: 700;
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .cta-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      line-height: 1.7;
-      position: relative;
-    }
-
-    .cta .btn {
-      position: relative;
-    }
-
-    .cta-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: var(--radius-lg);
-      margin: 0 auto 24px;
-      box-shadow: 0 4px 20px rgba(66, 133, 244, 0.2);
-    }
-
-    /* ==============================================
-       FOOTER
-       ============================================== */
-    .footer {
-      background-color: var(--surface);
-      border-top: 1px solid var(--border-subtle);
-      padding: 48px 0 32px;
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-brand .logo-icon {
-      width: 32px;
-      height: 32px;
-    }
-
-    .footer-brand-name {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .footer-link {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      transition: color var(--transition);
-    }
-
-    .footer-link:hover {
-      color: #FFFFFF;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border-subtle);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* ==============================================
-       SCROLL ANIMATIONS
-       ============================================== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Stagger children */
-    .stagger-children .fade-up:nth-child(1) { transition-delay: 0.05s; }
-    .stagger-children .fade-up:nth-child(2) { transition-delay: 0.1s; }
-    .stagger-children .fade-up:nth-child(3) { transition-delay: 0.15s; }
-    .stagger-children .fade-up:nth-child(4) { transition-delay: 0.2s; }
-    .stagger-children .fade-up:nth-child(5) { transition-delay: 0.25s; }
-    .stagger-children .fade-up:nth-child(6) { transition-delay: 0.3s; }
-    .stagger-children .fade-up:nth-child(7) { transition-delay: 0.35s; }
-
-    /* ==============================================
-       RESPONSIVE STYLES
-       ============================================== */
-
-    /* Tablet */
-    @media (max-width: 1024px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        text-align: center;
-      }
-
-      .hero-content {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .hero-description {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .hero-stats {
-        justify-content: center;
-      }
-
-      .hero-visual {
-        order: -1;
-      }
-
-      .hero-img {
-        width: 240px;
-      }
-
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .why-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .why-content {
-        text-align: center;
-      }
-
-      .why-content .section-subtitle {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .why-list {
-        max-width: 480px;
-        margin: 0 auto;
-      }
-
-      .trust-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Mobile */
-    @media (max-width: 640px) {
-      .section {
-        padding: 64px 0;
-      }
-
-      .container {
-        padding: 0 16px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .menu-toggle {
-        display: flex;
-      }
-
-      /* Mobile nav overlay */
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--background);
-        padding: 24px;
-        gap: 16px;
-        z-index: 999;
-        animation: fadeIn 0.2s ease;
-      }
-
-      .nav-links.open .nav-link {
-        font-size: 1.1rem;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-
-      .hero {
-        padding-top: 100px;
-        padding-bottom: 64px;
-      }
-
-      .hero-title {
-        font-size: clamp(1.75rem, 7vw, 2.5rem);
-      }
-
-      .hero-stats {
-        gap: 24px;
-      }
-
-      .hero-stat-value {
-        font-size: 1.25rem;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .trust-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .screenshot-item {
-        width: 220px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .cta-inner {
-        padding: 48px 24px;
-      }
-
-      .hero-img {
-        width: 200px;
-      }
-    }
-
-    /* Focus visible for accessibility */
-    :focus-visible {
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .fade-up {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Jesser Hamdi is a Software Engineer specializing in Flutter mobile development, with experience in backend, AI, and IoT.">
+    <meta name="author" content="Jesser Hamdi">
+    <meta name="keywords" content="Flutter, Mobile Developer, Software Engineer, Jesser Hamdi, SalahMate, PlantCare, Flag Frenzy">
+    <title>Jesser Hamdi · Software Engineer, Flutter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #f4f5f9;
+            --bg-alt: #ffffff;
+            --bg-panel: #ffffff;
+            --bg-gutter: #eceef4;
+            --text: #1a1d27;
+            --text-muted: #5c6272;
+            --comment: #8b90a0;
+            --card-border: #e2e4ee;
+            --primary: #b8790c;
+            --primary-strong: #96620a;
+            --accent: #0e9a63;
+            --accent-purple: #6e4fd6;
+            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            --sans: 'Inter', sans-serif;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+            --radius-sm: 6px;
+            --shadow-lg: 0 24px 48px rgba(20, 24, 38, 0.10);
+            --shadow-md: 0 14px 28px rgba(20, 24, 38, 0.08);
+            --shadow-sm: 0 6px 16px rgba(20, 24, 38, 0.06);
+            color-scheme: light;
+        }
+
+        body[data-theme="dark"] {
+            --bg: #0d0f16;
+            --bg-alt: #151822;
+            --bg-panel: #12141d;
+            --bg-gutter: #191c28;
+            --text: #eceef5;
+            --text-muted: #9299ad;
+            --comment: #656c81;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #e8ac48;
+            --primary-strong: #f4c46e;
+            --accent: #5fd6a0;
+            --accent-purple: #a68bfb;
+            --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.45);
+            --shadow-md: 0 14px 28px rgba(0, 0, 0, 0.38);
+            --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.3);
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            transition: background 0.35s ease, color 0.35s ease;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        main {
+            position: relative;
+            z-index: 2;
+        }
+
+        code, .mono {
+            font-family: var(--mono);
+        }
+
+        /* Navigation — styled as an editor tab bar */
+        nav {
+            position: fixed;
+            inset: 0 0 auto 0;
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--card-border);
+            background: color-mix(in srgb, var(--bg) 86%, transparent 14%);
+            z-index: 100;
+            transition: background 0.35s ease, border-color 0.35s ease;
+        }
+
+        .nav-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0.85rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+        }
+
+        .brand-mark {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-gutter);
+            border: 1px solid var(--card-border);
+            display: grid;
+            place-items: center;
+            color: var(--primary);
+            font-weight: 700;
+            font-family: var(--mono);
+            letter-spacing: -0.02em;
+            font-size: 0.85rem;
+        }
+
+        .brand span {
+            color: var(--text-muted);
+        }
+
+        .brand span::before {
+            content: '~/';
+            color: var(--comment);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-weight: 500;
+            font-family: var(--mono);
+            font-size: 0.83rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links a {
+            position: relative;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            border: 1px solid transparent;
+            border-bottom: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .nav-links a::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--comment);
+            transition: background 0.25s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            background: var(--bg-gutter);
+            border-color: var(--card-border);
+            border-bottom-color: var(--primary);
+            color: var(--text);
+        }
+
+        .nav-links a:hover::before {
+            background: var(--accent);
+        }
+
+        .nav-links a.nav-cta {
+            margin-left: 0.4rem;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid var(--card-border);
+            background: color-mix(in srgb, var(--primary) 12%, transparent 88%);
+            color: var(--primary-strong);
+            font-weight: 600;
+        }
+
+        .nav-links a.nav-cta::before {
+            display: none;
+        }
+
+        .nav-links a.nav-cta:hover {
+            background: color-mix(in srgb, var(--primary) 20%, transparent 80%);
+            border-bottom-color: var(--card-border);
+        }
+
+        .theme-toggle {
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-sm);
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-gutter);
+            color: var(--text);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-1px);
+            background: color-mix(in srgb, var(--bg-gutter) 80%, var(--primary) 10%);
+        }
+
+        .mobile-trigger {
+            display: none;
+            flex-direction: column;
+            gap: 0.28rem;
+            cursor: pointer;
+            padding: 0.55rem;
+            border-radius: var(--radius-sm);
+            background: var(--bg-gutter);
+            border: 1px solid var(--card-border);
+        }
+
+        .mobile-trigger span {
+            width: 18px;
+            height: 2px;
+            background: var(--text);
+            display: block;
+        }
+
+        /* Hero — a code editor window */
+        .hero {
+            padding: clamp(7.5rem, 12vw, 9.5rem) 1.5rem 5rem;
+        }
+
+        .hero-inner {
+            max-width: 880px;
+            margin: 0 auto;
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            background: var(--bg-panel);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .hero-titlebar {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.85rem 1.3rem;
+            border-bottom: 1px solid var(--card-border);
+            background: var(--bg-gutter);
+        }
+
+        .hero-dots {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .hero-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--card-border);
+        }
+
+        .hero-dots span:nth-child(1) { background: #f28b82; }
+        .hero-dots span:nth-child(2) { background: #fbbc57; }
+        .hero-dots span:nth-child(3) { background: #81c995; }
+
+        .hero-filename {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .hero-filename::before {
+            content: '●';
+            color: var(--primary);
+            font-size: 0.6rem;
+        }
+
+        .hero-body {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding: 2.4rem clamp(1.5rem, 4vw, 3rem);
+            gap: 1.5rem;
+        }
+
+        .hero-gutter {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--comment);
+            text-align: right;
+            user-select: none;
+            line-height: 1.9;
+            padding-top: 0.15rem;
+        }
+
+        .hero-code {
+            min-width: 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            color: var(--accent);
+            margin-bottom: 1.1rem;
+        }
+
+        .hero-badge::before {
+            content: '//';
+            color: var(--comment);
+        }
+
+        .hero h1 {
+            font-family: var(--mono);
+            font-size: clamp(1.6rem, 3.6vw, 2.35rem);
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            min-height: 1.6em;
+        }
+
+        .hero h1 .kw { color: var(--accent-purple); }
+        .hero h1 .fn { color: var(--primary); }
+
+        #cursor {
+            display: inline-block;
+            animation: blink 1s step-end infinite;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .typing-done #cursor {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 62ch;
+            margin: 1.3rem 0 1.7rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1.7rem;
+        }
+
+        .btn {
+            font-family: var(--mono);
+            font-size: 0.86rem;
+            font-weight: 500;
+            padding: 0.65rem 1.15rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn::before {
+            content: '▸';
+            font-size: 0.75rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #14151a;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-neutral {
+            background: var(--bg-gutter);
+            border-color: var(--card-border);
+            color: var(--text);
+        }
+
+        .btn-outline {
+            border-color: var(--card-border);
+            color: var(--text-muted);
+        }
+
+        .btn-neutral:hover,
+        .btn-outline:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+            color: var(--text);
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .chip {
+            font-family: var(--mono);
+            font-size: 0.76rem;
+            padding: 0.3rem 0.65rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--card-border);
+            background: var(--bg-gutter);
+            color: var(--text-muted);
+        }
+
+        /* Section layout */
+        .section-frame {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+        }
+
+        .section-header {
+            margin-bottom: 2.6rem;
+            max-width: 640px;
+        }
+
+        .eyebrow {
+            display: block;
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            color: var(--comment);
+            margin-bottom: 0.6rem;
+        }
+
+        .eyebrow .kw { color: var(--accent-purple); }
+
+        .section-header h2 {
+            font-size: clamp(1.7rem, 3vw, 2.15rem);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.6rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+        }
+
+        /* Shared panel look for cards */
+        .card,
+        .project-card,
+        .skill-card,
+        .timeline-card,
+        .contact-card,
+        .education-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--card-border);
+            border-left: 3px solid var(--card-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-color 0.25s ease;
+        }
+
+        .card:hover,
+        .project-card:hover,
+        .skill-card:hover,
+        .timeline-card:hover,
+        .contact-card:hover,
+        .education-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-left-color: var(--primary);
+        }
+
+        /* About */
+        .about-wrap {
+            display: grid;
+            gap: clamp(1.4rem, 3vw, 2rem);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .card {
+            padding: clamp(1.6rem, 3.5vw, 2rem);
+            display: grid;
+            gap: 1rem;
+            align-content: start;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+        }
+
+        .stat-list {
+            display: grid;
+            gap: 0.7rem;
+            margin-top: 0.3rem;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--mono);
+            font-size: 0.86rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed var(--card-border);
+        }
+
+        .stat:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .stat span {
+            color: var(--text-muted);
+        }
+
+        .stat strong {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .project-list {
+            display: grid;
+            gap: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .project-list li {
+            display: flex;
+            gap: 0.55rem;
+        }
+
+        .project-list li span:first-child {
+            color: var(--accent);
+            font-family: var(--mono);
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            gap: clamp(1.6rem, 3vw, 2.2rem);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .project-card {
+            padding: clamp(1.6rem, 4vw, 2rem);
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        .project-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            font-weight: 700;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+        }
+
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .project-meta .chip {
+            color: var(--text-muted);
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: auto;
+            padding-top: 0.4rem;
+        }
+
+        .project-links a {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-strong);
+        }
+
+        .project-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills */
+        .skill-grid {
+            display: grid;
+            gap: clamp(1.4rem, 3vw, 2rem);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .skill-card {
+            padding: clamp(1.5rem, 3.5vw, 1.9rem);
+            display: grid;
+            gap: 0.9rem;
+            align-content: start;
+        }
+
+        .skill-card h3 {
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+        }
+
+        .skill-list {
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .skill-list li {
+            display: flex;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.94rem;
+        }
+
+        .skill-list li span:first-child {
+            color: var(--accent);
+            font-family: var(--mono);
+        }
+
+        /* Experience timeline */
+        .timeline {
+            display: grid;
+            gap: 1.6rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 16px 1fr;
+            gap: 1.2rem;
+        }
+
+        .timeline-marker {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 1.6rem;
+            position: relative;
+        }
+
+        .timeline-marker::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 4px;
+            width: 1px;
+            height: calc(100% + 30px);
+            background: var(--card-border);
+        }
+
+        .timeline-item:last-child .timeline-marker::after {
+            display: none;
+        }
+
+        .timeline-card {
+            padding: clamp(1.5rem, 3.5vw, 1.9rem);
+            display: grid;
+            gap: 0.85rem;
+        }
+
+        .timeline-card header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 0.75rem;
+            align-items: baseline;
+        }
+
+        .timeline-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .timeline-card header span {
+            color: var(--text-muted);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+        }
+
+        .timeline-card ul {
+            color: var(--text-muted);
+            display: grid;
+            gap: 0.55rem;
+        }
+
+        .timeline-card ul li strong {
+            color: var(--text);
+        }
+
+        /* Education */
+        .education-card {
+            padding: clamp(1.6rem, 3.5vw, 2rem);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+
+        .education-card strong {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .education-card span {
+            color: var(--text-muted);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+        }
+
+        .education-card .chip {
+            color: var(--primary);
+        }
+
+        .education-card p {
+            color: var(--text-muted);
+        }
+
+        /* Contact / Languages */
+        .contact-grid {
+            display: grid;
+            gap: clamp(1.2rem, 3vw, 1.8rem);
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .contact-card {
+            padding: clamp(1.5rem, 3.5vw, 1.8rem);
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .contact-card small {
+            text-transform: uppercase;
+            font-family: var(--mono);
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            font-size: 0.72rem;
+            color: var(--comment);
+        }
+
+        .contact-card a {
+            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            color: var(--primary-strong);
+        }
+
+        .contact-card p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+        }
+
+        .footer {
+            padding: 2.2rem 1.5rem 3.2rem;
+            text-align: center;
+            color: var(--comment);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: 2rem;
+        }
+
+        .footer span {
+            display: block;
+            margin-top: 0.4rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .nav-links {
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 1.5rem;
+                margin-left: auto;
+                width: min(280px, 80vw);
+                flex-direction: column;
+                align-items: stretch;
+                background: var(--bg-panel);
+                border: 1px solid var(--card-border);
+                border-radius: var(--radius-md);
+                padding: 0.6rem;
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-12px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease, transform 0.25s ease;
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .nav-links a {
+                border-radius: var(--radius-sm);
+                border-bottom: 1px solid transparent;
+            }
+
+            .nav-links a.nav-cta {
+                margin-left: 0;
+                margin-top: 0.3rem;
+                justify-content: center;
+            }
+
+            .theme-toggle span:last-child {
+                display: none;
+            }
+
+            .mobile-trigger {
+                display: flex;
+            }
+
+            .hero-body {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-gutter {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                padding: 0.8rem 1.2rem;
+            }
+
+            .hero {
+                padding: 6.5rem 1rem 3.5rem;
+            }
+
+            .hero-body {
+                padding: 1.8rem 1.3rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .section-frame {
+                padding: 3.5rem 1.2rem;
+            }
+
+            .project-card,
+            .skill-card,
+            .timeline-card,
+            .card,
+            .contact-card,
+            .education-card {
+                padding: 1.4rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 1.3rem;
+            }
+
+            .brand span {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
 </head>
 
-<body>
-  <!-- ============================================
-       HEADER
-       ============================================ -->
-  <header class="header" role="banner">
-    <div class="container header-inner">
-      <a href="#" class="logo" aria-label="SalahMate — Home">
-        <span class="logo-icon"><img src="images/salahMate.png" alt="SalahMate icon" width="36" height="36" /></span>
-        <span>SalahMate</span>
-      </a>
-
-      <nav class="nav" role="navigation" aria-label="Main navigation">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#features" class="nav-link">Features</a></li>
-          <li><a href="#why" class="nav-link">Why SalahMate</a></li>
-          <li><a href="#screenshots" class="nav-link">Screenshots</a></li>
-          <li><a href="#trust" class="nav-link">Trust</a></li>
-        </ul>
-
-        <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-           class="btn btn-primary"
-           target="_blank"
-           rel="noopener noreferrer"
-           aria-label="Download SalahMate on Google Play">
-          <!-- Google Play icon -->
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.2 12l2.498-2.492zM5.864 3.658L16.8 9.99l-2.302 2.302-8.634-8.634z"/>
-          </svg>
-          Download
-        </a>
-
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </button>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <!-- ============================================
-         HERO SECTION
-         ============================================ -->
-    <section class="hero" id="hero">
-      <div class="container hero-inner">
-        <div class="hero-content">
-          <div class="hero-badge fade-up">
-            <span class="hero-badge-dot" aria-hidden="true"></span>
-            Available on Android
-          </div>
-
-          <h1 class="hero-title fade-up">
-            Your Companion for<br/>
-            <span class="highlight">Salah &amp; Quran</span>
-          </h1>
-
-          <p class="hero-description fade-up">
-            A beautifully simple Islamic app with Quran recitations, Tafsir, accurate prayer times, Qibla direction, and daily Adhkar — designed for focus and khushu'.
-          </p>
-
-          <div class="hero-actions fade-up">
-            <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-               class="btn btn-primary btn-large"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Download SalahMate on Google Play">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.2 12l2.498-2.492zM5.864 3.658L16.8 9.99l-2.302 2.302-8.634-8.634z"/>
-              </svg>
-              Download on Google Play
+<body data-theme="light">
+    <nav>
+        <div class="nav-container">
+            <a class="brand" href="#top" aria-label="Back to top">
+                <div class="brand-mark">JH</div>
+                <span>jesser</span>
             </a>
-          </div>
-
-          <div class="hero-stats fade-up">
-            <div>
-              <div class="hero-stat-value">7+</div>
-              <div class="hero-stat-label">Core Features</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">about.md</a>
+                <a href="#skills">skills.json</a>
+                <a href="#experience">experience.log</a>
+                <a href="#projects">projects/</a>
+                <a href="#education">education.md</a>
+                <a href="#contact">contact.sh</a>
+                <a href="app_page.html" class="nav-cta">SalahMate App ↗</a>
             </div>
-            <div>
-              <div class="hero-stat-value">100%</div>
-              <div class="hero-stat-label">Free to Use</div>
+            <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false">
+                <span id="themeIcon">🌙</span>
+                <span id="themeLabel">Dark</span>
+            </button>
+            <button class="mobile-trigger" id="mobileTrigger" type="button" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="top">
+            <div class="hero-inner reveal">
+                <div class="hero-titlebar">
+                    <div class="hero-dots"><span></span><span></span><span></span></div>
+                    <span class="hero-filename">jesser_hamdi.dart</span>
+                </div>
+                <div class="hero-body">
+                    <div class="hero-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5<br>6<br>7</div>
+                    <div class="hero-code">
+                        <div class="hero-badge">
+                            <span>actively seeking full-time software engineering roles</span>
+                        </div>
+                        <h1 id="heroTitle"><span id="typed-text"></span><span id="cursor">|</span></h1>
+                        <p>I'm Jesser Hamdi, a Software Engineer specializing in Flutter mobile development. I have
+                            hands-on experience building and publishing production-ready applications from concept to
+                            deployment — integrating backend services and applying AI and IoT to solve real-world
+                            problems.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="cv.pdf" download>Download CV</a>
+                            <a class="btn btn-neutral" href="app_page.html">Explore SalahMate App ↗</a>
+                            <a class="btn btn-outline" href="mailto:jasser.hamdi@fsb.ucar.tn">Let’s collaborate</a>
+                        </div>
+                        <div class="hero-tags">
+                            <span class="chip">Flutter</span>
+                            <span class="chip">Dart</span>
+                            <span class="chip">Firebase</span>
+                            <span class="chip">TensorFlow Lite</span>
+                            <span class="chip">Spring Boot</span>
+                            <span class="chip">Angular</span>
+                            <span class="chip">Python</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <div class="hero-stat-value">Offline</div>
-              <div class="hero-stat-label">Ready</div>
+        </section>
+
+        <section id="about">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// about.md</span>
+                    <h2>Professional Summary</h2>
+                    <p>Software Engineer specializing in Flutter mobile development, with a strong foundation in
+                        software engineering, UI/UX design, and cross-platform development.</p>
+                </div>
+                <div class="about-wrap">
+                    <article class="card reveal">
+                        <h3>What I do</h3>
+                        <p>I build scalable mobile solutions, integrate backend services, and apply AI and IoT
+                            technologies to solve real-world problems — from concept to deployment. I'm eager to bring
+                            technical expertise, problem-solving skills, and continuous learning to a collaborative
+                            software development team.</p>
+                        <ul class="stat-list">
+                            <li class="stat"><span>• Flutter app published on Google Play</span><strong
+                                    class="counter" data-target="1">0</strong></li>
+                            <li class="stat"><span>• Personal Flutter projects shipped</span><strong class="counter"
+                                    data-target="3">0</strong></li>
+                            <li class="stat"><span>• Expected graduation (FSB, Université de Carthage)</span><strong
+                                    class="counter" data-target="2026">2023</strong></li>
+                        </ul>
+                    </article>
+                    <article class="card reveal">
+                        <h3>What I focus on</h3>
+                        <ul class="project-list">
+                            <li><span>▹</span><span>Building and publishing production-ready mobile applications from
+                                    concept to deployment.</span></li>
+                            <li><span>▹</span><span>Integrating backend services with mobile front ends for reliable,
+                                    end-to-end products.</span></li>
+                            <li><span>▹</span><span>Applying AI and IoT technologies — such as TensorFlow Lite and
+                                    connected hardware — to practical problems.</span></li>
+                            <li><span>▹</span><span>UI/UX design and cross-platform development focused on
+                                    high-quality, user-focused applications.</span></li>
+                        </ul>
+                    </article>
+                </div>
             </div>
-          </div>
-        </div>
+        </section>
 
-        <div class="hero-visual fade-up">
-          <img src="images/1_home.webp"
-               alt="SalahMate home screen showing prayer times and quick access features"
-               class="hero-img"
-               loading="eager"
-               width="300" />
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         FEATURES SECTION
-         ============================================ -->
-    <section class="features section" id="features">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="section-label">Features</span>
-          <h2 class="section-title">Everything You Need,<br/>Nothing You Don't</h2>
-          <p class="section-subtitle">
-            SalahMate brings together the essential tools every Muslim needs — thoughtfully designed, distraction-free, and ready when you are.
-          </p>
-        </div>
-
-        <div class="features-grid stagger-children">
-          <!-- Feature 1: Quran -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">📖</div>
-            <h3 class="feature-title">Quran with Recitations</h3>
-            <p class="feature-description">
-              Read the Holy Quran with multiple recitations and ayah-by-ayah audio playback for a deeply immersive experience.
-            </p>
-          </div>
-
-          <!-- Feature 2: Tafsir -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">📜</div>
-            <h3 class="feature-title">Tafsir &amp; Asbab al-Nuzul</h3>
-            <p class="feature-description">
-              Understand the meaning behind every verse with detailed Tafsir and the reasons of revelation.
-            </p>
-          </div>
-
-          <!-- Feature 3: Prayer Times -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">🕌</div>
-            <h3 class="feature-title">Accurate Prayer Times</h3>
-            <p class="feature-description">
-              Get precise prayer time calculations based on your location, so you never miss a Salah.
-            </p>
-          </div>
-
-          <!-- Feature 4: Qibla -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">🧭</div>
-            <h3 class="feature-title">Qibla Finder</h3>
-            <p class="feature-description">
-              Find the exact direction of the Qibla wherever you are with a smooth, reliable compass.
-            </p>
-          </div>
-
-          <!-- Feature 5: Adhkar -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">🤲</div>
-            <h3 class="feature-title">Daily Adhkar</h3>
-            <p class="feature-description">
-              Morning and evening remembrances at your fingertips — build a consistent daily habit of dhikr.
-            </p>
-          </div>
-
-          <!-- Feature 6: Offline -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">📡</div>
-            <h3 class="feature-title">Offline Support</h3>
-            <p class="feature-description">
-              Access core features without an internet connection — perfect for travel, the masjid, or anywhere.
-            </p>
-          </div>
-
-          <!-- Feature 7: Clean Interface -->
-          <div class="feature-card fade-up">
-            <div class="feature-icon" aria-hidden="true">✨</div>
-            <h3 class="feature-title">Clean Interface</h3>
-            <p class="feature-description">
-              A minimal, distraction-free design that helps you focus on what matters — your ibadah.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         WHY SALAHMATE SECTION
-         ============================================ -->
-    <section class="why-section section" id="why">
-      <div class="container">
-        <div class="why-grid">
-          <div class="why-content">
-            <span class="section-label fade-up">Why SalahMate</span>
-            <h2 class="section-title fade-up">Built Different.<br/>Built with Care.</h2>
-            <p class="section-subtitle fade-up">
-              SalahMate isn't just another Islamic app. It's thoughtfully crafted to give you 
-              exactly what you need — without the clutter, without the noise.
-            </p>
-
-            <div class="why-list">
-              <div class="why-item fade-up">
-                <div class="why-item-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                  </svg>
+        <section id="skills">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// skills.json</span>
+                    <h2>Technical Skills</h2>
+                    <p>The languages, frameworks, and tools I work with across mobile, backend, and data.</p>
                 </div>
-                <div class="why-item-text">
-                  <h4>Lightweight &amp; Fast</h4>
-                  <p>No bloat, no lag. SalahMate launches quickly and runs smoothly on any device.</p>
-                </div>
-              </div>
+                <div class="skill-grid">
+                    <article class="skill-card reveal">
+                        <h3>Mobile</h3>
+                        <ul class="skill-list">
+                            <li><span>▹</span><span>Flutter, Dart</span></li>
+                            <li><span>▹</span><span>Android Studio</span></li>
+                            <li><span>▹</span><span>Firebase, TensorFlow Lite</span></li>
+                        </ul>
+                    </article>
 
-              <div class="why-item fade-up">
-                <div class="why-item-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M8 12l2 2 4-4"/>
-                  </svg>
-                </div>
-                <div class="why-item-text">
-                  <h4>No Unnecessary Clutter</h4>
-                  <p>Every screen serves a purpose. We removed the distractions so you can focus on ibadah.</p>
-                </div>
-              </div>
+                    <article class="skill-card reveal">
+                        <h3>Backend &amp; Web</h3>
+                        <ul class="skill-list">
+                            <li><span>▹</span><span>Spring Boot, Express.js, Jakarta EE</span></li>
+                            <li><span>▹</span><span>Java, JavaScript, Python, C</span></li>
+                        </ul>
+                    </article>
 
-              <div class="why-item fade-up">
-                <div class="why-item-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                  </svg>
-                </div>
-                <div class="why-item-text">
-                  <h4>Built with Care</h4>
-                  <p>Designed with Islamic principles in mind — respectful, accurate, and made with sincerity.</p>
-                </div>
-              </div>
+                    <article class="skill-card reveal">
+                        <h3>Frontend</h3>
+                        <ul class="skill-list">
+                            <li><span>▹</span><span>React.js, Angular</span></li>
+                            <li><span>▹</span><span>HTML, CSS, TypeScript</span></li>
+                        </ul>
+                    </article>
 
-              <div class="why-item fade-up">
-                <div class="why-item-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
+                    <article class="skill-card reveal">
+                        <h3>Data &amp; Analytics</h3>
+                        <ul class="skill-list">
+                            <li><span>▹</span><span>Pandas, NumPy</span></li>
+                            <li><span>▹</span><span>Power BI</span></li>
+                            <li><span>▹</span><span>Business Intelligence concepts</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="skill-card reveal">
+                        <h3>Databases</h3>
+                        <ul class="skill-list">
+                            <li><span>▹</span><span>SQL Server</span></li>
+                            <li><span>▹</span><span>Firebase Firestore</span></li>
+                            <li><span>▹</span><span>SQLAlchemy, JDBC</span></li>
+                        </ul>
+                    </article>
+
+                    <article class="skill-card reveal">
+                        <h3>Tools &amp; Others</h3>
+                        <ul class="skill-list">
+                            <li><span>▹</span><span>Git, Version Control</span></li>
+                            <li><span>▹</span><span>Figma, LaTeX</span></li>
+                            <li><span>▹</span><span>UI scaling scripts, Agile/Scrum workflows</span></li>
+                        </ul>
+                    </article>
                 </div>
-                <div class="why-item-text">
-                  <h4>Designed for Khushu'</h4>
-                  <p>A calm, focused environment that helps you connect deeply with your prayers and recitation.</p>
-                </div>
-              </div>
             </div>
-          </div>
+        </section>
 
-          <div class="why-visual fade-up">
-            <div class="why-card-stack">
-              <div class="why-card">
-                <div class="why-card-icon" aria-hidden="true">⚡</div>
-                <div>
-                  <div class="why-card-title">Instant Launch</div>
-                  <div class="why-card-desc">Opens in under a second</div>
+        <section id="experience">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// experience.log</span>
+                    <h2>Experience</h2>
+                    <p>Roles and long-running initiatives that shaped how I deliver software.</p>
                 </div>
-              </div>
-              <div class="why-card">
-                <div class="why-card-icon" aria-hidden="true">🎯</div>
-                <div>
-                  <div class="why-card-title">Purpose-Driven</div>
-                  <div class="why-card-desc">Every feature serves your deen</div>
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker" aria-hidden="true"></div>
+                        <article class="timeline-card">
+                            <header>
+                                <div>
+                                    <h3>Summer Intern</h3>
+                                    <span>SAGEMCOM · Tunis, Tunisia</span>
+                                </div>
+                                <span>July 2024</span>
+                            </header>
+                            <ul>
+                                <li>Built an ETL pipeline to extract, transform, and load business data.</li>
+                                <li>Developed BI workflows and dashboards using SQL Server, Power BI, and Python
+                                    (Pandas).</li>
+                                <li>Strengthened understanding of data analytics and automation in industrial
+                                    contexts.</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker" aria-hidden="true"></div>
+                        <article class="timeline-card">
+                            <header>
+                                <div>
+                                    <h3>Flutter Developer</h3>
+                                    <span>Personal Projects</span>
+                                </div>
+                                <span>2022 – Present</span>
+                            </header>
+                            <ul>
+                                <li><strong>SalahMate:</strong> full-featured Islamic app with prayer times, Quran
+                                    reading and audio playback, adhkar, Qibla compass, Hijri calendar, and
+                                    customizable notifications — published on the Google Play Store.</li>
+                                <li><strong>PlantCare (IoT &amp; AI):</strong> smart greenhouse system built with
+                                    BeagleBone, integrating a Flutter frontend, Firebase backend, and a TensorFlow
+                                    Lite plant disease detection module.</li>
+                                <li><strong>Flag Frenzy:</strong> gamified educational app with quiz modes,
+                                    achievements, a coin economy, and Supabase/Google Sign-In profile sync.</li>
+                            </ul>
+                        </article>
+                    </div>
                 </div>
-              </div>
-              <div class="why-card">
-                <div class="why-card-icon" aria-hidden="true">🔒</div>
-                <div>
-                  <div class="why-card-title">Privacy First</div>
-                  <div class="why-card-desc">Your data stays yours</div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// projects/</span>
+                    <h2>Projects</h2>
+                    <p>The three personal Flutter projects referenced above, in more detail.</p>
                 </div>
-              </div>
-              <div class="why-card">
-                <div class="why-card-icon" aria-hidden="true">💎</div>
-                <div>
-                  <div class="why-card-title">Completely Free</div>
-                  <div class="why-card-desc">No premium walls, no hidden fees</div>
+                <div class="project-grid">
+                    <article class="project-card reveal">
+                        <div class="project-top">
+                            <span class="project-label">Mobile · Published</span>
+                            <h3>SalahMate — Islamic companion app</h3>
+                            <p>Full-featured Islamic app providing prayer times, Quran reading and audio playback,
+                                adhkar, Qibla compass, Hijri calendar, and customizable notifications.</p>
+                        </div>
+                        <ul class="project-list">
+                            <li><span>▹</span><span>Multi-language support (Arabic, English, French) with UI scaling
+                                    for all devices.</span></li>
+                            <li><span>▹</span><span>Dynamic theming (light, dark, black) and battery-optimized
+                                    background services.</span></li>
+                        </ul>
+                        <div class="project-meta">
+                            <span class="chip">Flutter</span>
+                            <span class="chip">Firebase</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="app_page.html">App website →</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
+                                target="_blank" rel="noopener">Play Store →</a>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="project-top">
+                            <span class="project-label">IoT · AI</span>
+                            <h3>PlantCare — smart greenhouse system</h3>
+                            <p>Smart greenhouse system built with BeagleBone, integrating a Flutter frontend and
+                                Firebase backend.</p>
+                        </div>
+                        <ul class="project-list">
+                            <li><span>▹</span><span>Live sensor data visualization — temperature, humidity, light,
+                                    and pressure.</span></li>
+                            <li><span>▹</span><span>Configurable thresholds with alerts, plus a TensorFlow Lite
+                                    module for plant disease detection via image analysis.</span></li>
+                        </ul>
+                        <div class="project-meta">
+                            <span class="chip">Flutter</span>
+                            <span class="chip">Firebase</span>
+                            <span class="chip">TensorFlow Lite</span>
+                            <span class="chip">BeagleBone</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="project-top">
+                            <span class="project-label">Mobile · Gamified Learning</span>
+                            <h3>Flag Frenzy — quiz &amp; geography game</h3>
+                            <p>Gamified educational app with multiple quiz modes, achievements, daily rewards, and a
+                                coin economy.</p>
+                        </div>
+                        <ul class="project-list">
+                            <li><span>▹</span><span>Profile synchronization using Supabase and Google Sign-In.</span>
+                            </li>
+                            <li><span>▹</span><span>Progression engine and ad monetization built for an engaging
+                                    user experience.</span></li>
+                        </ul>
+                        <div class="project-meta">
+                            <span class="chip">Flutter</span>
+                            <span class="chip">Supabase</span>
+                            <span class="chip">Google Sign-In</span>
+                        </div>
+                    </article>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- ============================================
-         SCREENSHOTS SECTION
-         ============================================ -->
-    <section class="screenshots section" id="screenshots">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="section-label">Screenshots</span>
-          <h2 class="section-title">See SalahMate in Action</h2>
-          <p class="section-subtitle">
-            A clean, focused design that puts your ibadah front and center.
-          </p>
-        </div>
-
-        <div class="screenshots-scroll stagger-children">
-          <div class="screenshot-item fade-up">
-            <img src="images/1_home.webp" alt="SalahMate home screen" loading="lazy" width="260" />
-            <div class="screenshot-label">Home</div>
-          </div>
-          <div class="screenshot-item fade-up">
-            <img src="images/2_quran_page.webp" alt="SalahMate Quran surah list" loading="lazy" width="260" />
-            <div class="screenshot-label">Quran</div>
-          </div>
-          <div class="screenshot-item fade-up">
-            <img src="images/3_quran_viewer.webp" alt="SalahMate Quran reader view" loading="lazy" width="260" />
-            <div class="screenshot-label">Quran Reader</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================
-         TRUST SECTION
-         ============================================ -->
-    <section class="trust section" id="trust">
-      <div class="container">
-        <div class="section-header fade-up">
-          <span class="section-label">Trust &amp; Privacy</span>
-          <h2 class="section-title">Your Privacy Matters</h2>
-          <p class="section-subtitle">
-            SalahMate is built with integrity — respecting your data, your time, and your worship.
-          </p>
-        </div>
-
-        <div class="trust-grid stagger-children">
-          <div class="trust-card fade-up">
-            <div class="trust-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
+        <section id="education">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// education.md</span>
+                    <h2>Education</h2>
+                    <p>Engineering fundamentals grounding my technical work.</p>
+                </div>
+                <article class="card education-card reveal">
+                    <strong>Engineering Degree in Software Engineering</strong>
+                    <span>Faculté des Sciences de Bizerte (FSB), Université de Carthage</span>
+                    <span class="chip">Expected 2026</span>
+                    <p>Bizerte, Tunisia. Enrolled since 2023.</p>
+                </article>
             </div>
-            <h3 class="trust-title">Privacy-Focused</h3>
-            <p class="trust-description">
-              We respect your privacy. SalahMate does not track, sell, or misuse your personal data in any way.
-              <br/><br/>
-              <a href="https://jesser.me/SalahMate_privacy_policy/Privacy%20Policy%20for%20SalahMate.html"
-                 class="trust-policy-link">Read our Privacy Policy &rarr;</a>
-            </p>
-          </div>
+        </section>
 
-          <div class="trust-card fade-up">
-            <div class="trust-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
+        <section id="languages">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// languages.md</span>
+                    <h2>Languages</h2>
+                </div>
+                <div class="contact-grid">
+                    <article class="contact-card reveal">
+                        <small>Arabic</small>
+                        <p>Native</p>
+                    </article>
+                    <article class="contact-card reveal">
+                        <small>English</small>
+                        <p>Fluent</p>
+                    </article>
+                    <article class="contact-card reveal">
+                        <small>French</small>
+                        <p>Intermediate</p>
+                    </article>
+                </div>
             </div>
-            <h3 class="trust-title">Minimal Data Collection</h3>
-            <p class="trust-description">
-              Only location data is used — solely for prayer times and Qibla direction. Nothing extra, nothing hidden.
-            </p>
-          </div>
+        </section>
 
-          <div class="trust-card fade-up">
-            <div class="trust-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 12l2 2 4-4"/>
-              </svg>
+        <section id="contact">
+            <div class="section-frame">
+                <div class="section-header reveal">
+                    <span class="eyebrow">// contact.sh</span>
+                    <h2>Let’s Collaborate</h2>
+                    <p>Share a role, project brief, or a complex integration challenge — happy to explore how I can
+                        help.</p>
+                </div>
+                <div class="contact-grid">
+                    <article class="contact-card reveal">
+                        <small>Email</small>
+                        <a href="mailto:jasser.hamdi@fsb.ucar.tn">jasser.hamdi@fsb.ucar.tn</a>
+                        <p>Best for role opportunities, project briefs, and partnership ideas.</p>
+                    </article>
+                    <article class="contact-card reveal">
+                        <small>LinkedIn</small>
+                        <a href="https://linkedin.com/in/jesser-hamdi-5b071a238" target="_blank"
+                            rel="noopener">linkedin.com/in/jesser-hamdi-5b071a238</a>
+                        <p>Let’s connect for professional updates and collaborations.</p>
+                    </article>
+                    <article class="contact-card reveal">
+                        <small>Phone</small>
+                        <a href="tel:+21658322998">+216 58 322 998</a>
+                        <p>Call or message anytime — you’ll hear back soon.</p>
+                    </article>
+                </div>
             </div>
-            <h3 class="trust-title">Reliable Calculations</h3>
-            <p class="trust-description">
-              Prayer times are calculated with trusted, well-known algorithms to ensure accuracy you can depend on.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- ============================================
-         CTA SECTION
-         ============================================ -->
-    <section class="cta section" id="download">
-      <div class="container">
-        <div class="cta-inner fade-up">
-          <img src="images/salahMate.png" alt="SalahMate" class="cta-icon" width="72" height="72" />
-          <h2 class="cta-title">Strengthen Your Connection<br/>with Salah Today</h2>
-          <p class="cta-subtitle">
-            Join thousands of Muslims who use SalahMate for a more focused, meaningful worship experience.
-          </p>
-          <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-             class="btn btn-primary btn-large"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Download SalahMate on Google Play">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 2.302a1 1 0 0 1 0 1.38l-2.302 2.302L15.2 12l2.498-2.492zM5.864 3.658L16.8 9.99l-2.302 2.302-8.634-8.634z"/>
-            </svg>
-            Download on Google Play
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
+    <footer class="footer">
+        <p>© <span id="year"></span> Jesser Hamdi. Designed and coded in Flutter spirit.</p>
+        <span>Built with love for purposeful technology.</span>
+    </footer>
 
-  <!-- ============================================
-       FOOTER
-       ============================================ -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <span class="logo-icon"><img src="images/salahMate.png" alt="SalahMate icon" width="32" height="32" /></span>
-          <span class="footer-brand-name">SalahMate</span>
-        </div>
+    <script>
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+        const mobileTrigger = document.getElementById('mobileTrigger');
+        const navLinks = document.getElementById('navLinks');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-        <div class="footer-links">
-          <a href="mailto:jhmobileapps.dev@gmail.com" class="footer-link">Contact</a>
-          <a href="https://jesser.me/SalahMate_privacy_policy/Privacy%20Policy%20for%20SalahMate.html"
-             class="footer-link">Privacy Policy</a>
-          <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-             class="footer-link"
-             target="_blank"
-             rel="noopener noreferrer">Google Play</a>
-        </div>
-      </div>
+        const applyTheme = (theme) => {
+            body.setAttribute('data-theme', theme);
+            const isDark = theme === 'dark';
+            themeToggle?.setAttribute('aria-pressed', String(isDark));
+            if (themeIcon) {
+                themeIcon.textContent = isDark ? '☀️' : '🌙';
+            }
+            if (themeLabel) {
+                themeLabel.textContent = isDark ? 'Light' : 'Dark';
+            }
+        };
 
-      <div class="footer-bottom">
-        &copy; 2026 SalahMate. All rights reserved.
-      </div>
-    </div>
-  </footer>
+        const storedTheme = localStorage.getItem('theme-preference');
+        if (storedTheme) {
+            applyTheme(storedTheme);
+        } else if (prefersDark.matches) {
+            applyTheme('dark');
+        }
 
-  <!-- ============================================
-       JAVASCRIPT — Minimal, no dependencies
-       ============================================ -->
-  <script>
-    (function () {
-      'use strict';
-
-      /* ----------------------------------------
-         Mobile Menu Toggle
-         ---------------------------------------- */
-      const menuToggle = document.getElementById('menuToggle');
-      const navLinks = document.getElementById('navLinks');
-
-      if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', function () {
-          const isOpen = navLinks.classList.toggle('open');
-          menuToggle.setAttribute('aria-expanded', isOpen);
+        themeToggle?.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
+            localStorage.setItem('theme-preference', next);
         });
 
-        // Close mobile menu when a nav link is clicked
-        navLinks.querySelectorAll('.nav-link').forEach(function (link) {
-          link.addEventListener('click', function () {
-            navLinks.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-          });
+        prefersDark.addEventListener('change', (event) => {
+            if (!localStorage.getItem('theme-preference')) {
+                applyTheme(event.matches ? 'dark' : 'light');
+            }
         });
-      }
 
-      /* ----------------------------------------
-         Scroll-triggered Fade-in Animations
-         Uses IntersectionObserver for performance
-         ---------------------------------------- */
-      var fadeElements = document.querySelectorAll('.fade-up');
+        mobileTrigger?.addEventListener('click', () => {
+            navLinks?.classList.toggle('open');
+        });
 
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-              }
+        navLinks?.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener('click', (event) => {
+                const targetId = anchor.getAttribute('href');
+                if (!targetId || targetId.length === 1) {
+                    return;
+                }
+                event.preventDefault();
+                const target = document.querySelector(targetId);
+                target?.scrollIntoView({ behavior: 'smooth' });
             });
-          },
-          {
-            threshold: 0.1,
-            rootMargin: '0px 0px -40px 0px',
-          }
-        );
-
-        fadeElements.forEach(function (el) {
-          observer.observe(el);
         });
-      } else {
-        // Fallback: show all elements immediately
-        fadeElements.forEach(function (el) {
-          el.classList.add('visible');
-        });
-      }
 
-      /* ----------------------------------------
-         Sticky Header — subtle background on scroll
-         ---------------------------------------- */
-      var header = document.querySelector('.header');
-      var scrollThreshold = 10;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Add stagger delay for grid items
+                    const parent = entry.target.parentNode;
+                    if (parent && (parent.classList.contains('project-grid') || parent.classList.contains('skill-grid') || parent.classList.contains('contact-grid'))) {
+                        const siblings = Array.from(parent.children).filter(child => child.classList.contains('reveal'));
+                        const index = siblings.indexOf(entry.target);
+                        entry.target.style.animationDelay = `${index * 0.2}s`;
+                    }
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.14, rootMargin: '0px 0px -12%' });
 
-      window.addEventListener(
-        'scroll',
-        function () {
-          if (window.scrollY > scrollThreshold) {
-            header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
-          } else {
-            header.style.backgroundColor = 'rgba(18, 18, 18, 0.85)';
-          }
-        },
-        { passive: true }
-      );
-    })();
-  </script>
+        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+
+        // Typing animation for hero title
+        const heroTitle = document.getElementById('heroTitle');
+        const typedText = document.getElementById('typed-text');
+        const cursor = document.getElementById('cursor');
+        const fullText = "Software Engineer specializing in Flutter mobile development.";
+        let index = 0;
+        const typeSpeed = 50; // ms per character
+
+        function typeWriter() {
+            if (index < fullText.length) {
+                typedText.textContent += fullText.charAt(index);
+                index++;
+                setTimeout(typeWriter, typeSpeed);
+            } else {
+                // Stop cursor blinking
+                heroTitle.classList.add('typing-done');
+            }
+        }
+
+        // Start typing after a short delay
+        setTimeout(typeWriter, 1000);
+
+        // Counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach((counter) => {
+                        const target = +counter.dataset.target;
+                        const duration = 1500; // ms
+                        const step = target / (duration / 16); // 60fps
+                        let current = 0;
+                        const update = () => {
+                            current += step;
+                            if (current < target) {
+                                counter.textContent = Math.floor(current);
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        };
+                        update();
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.card').forEach((card) => counterObserver.observe(card));
+
+        const year = document.getElementById('year');
+        year.textContent = new Date().getFullYear();
+    </script>
 </body>
+
 </html>
