@@ -1,1448 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Jesser Hamdi is a Software Engineer specializing in Flutter mobile development, with experience in backend, AI, and IoT.">
-    <meta name="author" content="Jesser Hamdi">
-    <meta name="keywords" content="Flutter, Mobile Developer, Software Engineer, Jesser Hamdi, SalahMate, PlantCare, Flag Frenzy">
-    <title>Jesser Hamdi · Software Engineer, Flutter</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --bg: #f4f5f9;
-            --bg-alt: #ffffff;
-            --bg-panel: #ffffff;
-            --bg-gutter: #eceef4;
-            --text: #1a1d27;
-            --text-muted: #5c6272;
-            --comment: #8b90a0;
-            --card-border: #e2e4ee;
-            --primary: #b8790c;
-            --primary-strong: #96620a;
-            --accent: #0e9a63;
-            --accent-purple: #6e4fd6;
-            --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-            --sans: 'Inter', sans-serif;
-            --radius-lg: 14px;
-            --radius-md: 10px;
-            --radius-sm: 6px;
-            --shadow-lg: 0 24px 48px rgba(20, 24, 38, 0.10);
-            --shadow-md: 0 14px 28px rgba(20, 24, 38, 0.08);
-            --shadow-sm: 0 6px 16px rgba(20, 24, 38, 0.06);
-            color-scheme: light;
-        }
-
-        body[data-theme="dark"] {
-            --bg: #0d0f16;
-            --bg-alt: #151822;
-            --bg-panel: #12141d;
-            --bg-gutter: #191c28;
-            --text: #eceef5;
-            --text-muted: #9299ad;
-            --comment: #656c81;
-            --card-border: rgba(255, 255, 255, 0.08);
-            --primary: #e8ac48;
-            --primary-strong: #f4c46e;
-            --accent: #5fd6a0;
-            --accent-purple: #a68bfb;
-            --shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.45);
-            --shadow-md: 0 14px 28px rgba(0, 0, 0, 0.38);
-            --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.3);
-            color-scheme: dark;
-        }
-
-        body {
-            font-family: var(--sans);
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            transition: background 0.35s ease, color 0.35s ease;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        main {
-            position: relative;
-            z-index: 2;
-        }
-
-        code, .mono {
-            font-family: var(--mono);
-        }
-
-        /* Navigation — styled as an editor tab bar */
-        nav {
-            position: fixed;
-            inset: 0 0 auto 0;
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--card-border);
-            background: color-mix(in srgb, var(--bg) 86%, transparent 14%);
-            z-index: 100;
-            transition: background 0.35s ease, border-color 0.35s ease;
-        }
-
-        .nav-container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0.85rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            font-weight: 600;
-            font-family: var(--mono);
-            font-size: 0.95rem;
-        }
-
-        .brand-mark {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--radius-sm);
-            background: var(--bg-gutter);
-            border: 1px solid var(--card-border);
-            display: grid;
-            place-items: center;
-            color: var(--primary);
-            font-weight: 700;
-            font-family: var(--mono);
-            letter-spacing: -0.02em;
-            font-size: 0.85rem;
-        }
-
-        .brand span {
-            color: var(--text-muted);
-        }
-
-        .brand span::before {
-            content: '~/';
-            color: var(--comment);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-weight: 500;
-            font-family: var(--mono);
-            font-size: 0.83rem;
-            color: var(--text-muted);
-        }
-
-        .nav-links a {
-            position: relative;
-            padding: 0.5rem 0.75rem;
-            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-            border: 1px solid transparent;
-            border-bottom: 2px solid transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-        }
-
-        .nav-links a::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--comment);
-            transition: background 0.25s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a:focus-visible {
-            background: var(--bg-gutter);
-            border-color: var(--card-border);
-            border-bottom-color: var(--primary);
-            color: var(--text);
-        }
-
-        .nav-links a:hover::before {
-            background: var(--accent);
-        }
-
-        .nav-links a.nav-cta {
-            margin-left: 0.4rem;
-            padding: 0.5rem 0.9rem;
-            border-radius: 999px;
-            border: 1px solid var(--card-border);
-            background: color-mix(in srgb, var(--primary) 12%, transparent 88%);
-            color: var(--primary-strong);
-            font-weight: 600;
-        }
-
-        .nav-links a.nav-cta::before {
-            display: none;
-        }
-
-        .nav-links a.nav-cta:hover {
-            background: color-mix(in srgb, var(--primary) 20%, transparent 80%);
-            border-bottom-color: var(--card-border);
-        }
-
-        .theme-toggle {
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-sm);
-            padding: 0.4rem 0.8rem;
-            background: var(--bg-gutter);
-            color: var(--text);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-weight: 500;
-            font-family: var(--mono);
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: background 0.25s ease, transform 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: translateY(-1px);
-            background: color-mix(in srgb, var(--bg-gutter) 80%, var(--primary) 10%);
-        }
-
-        .mobile-trigger {
-            display: none;
-            flex-direction: column;
-            gap: 0.28rem;
-            cursor: pointer;
-            padding: 0.55rem;
-            border-radius: var(--radius-sm);
-            background: var(--bg-gutter);
-            border: 1px solid var(--card-border);
-        }
-
-        .mobile-trigger span {
-            width: 18px;
-            height: 2px;
-            background: var(--text);
-            display: block;
-        }
-
-        /* Hero — a code editor window */
-        .hero {
-            padding: clamp(7.5rem, 12vw, 9.5rem) 1.5rem 5rem;
-        }
-
-        .hero-inner {
-            max-width: 880px;
-            margin: 0 auto;
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            background: var(--bg-panel);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-
-        .hero-titlebar {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            padding: 0.85rem 1.3rem;
-            border-bottom: 1px solid var(--card-border);
-            background: var(--bg-gutter);
-        }
-
-        .hero-dots {
-            display: flex;
-            gap: 0.4rem;
-        }
-
-        .hero-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--card-border);
-        }
-
-        .hero-dots span:nth-child(1) { background: #f28b82; }
-        .hero-dots span:nth-child(2) { background: #fbbc57; }
-        .hero-dots span:nth-child(3) { background: #81c995; }
-
-        .hero-filename {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .hero-filename::before {
-            content: '●';
-            color: var(--primary);
-            font-size: 0.6rem;
-        }
-
-        .hero-body {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            padding: 2.4rem clamp(1.5rem, 4vw, 3rem);
-            gap: 1.5rem;
-        }
-
-        .hero-gutter {
-            font-family: var(--mono);
-            font-size: 0.8rem;
-            color: var(--comment);
-            text-align: right;
-            user-select: none;
-            line-height: 1.9;
-            padding-top: 0.15rem;
-        }
-
-        .hero-code {
-            min-width: 0;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: var(--mono);
-            font-size: 0.78rem;
-            color: var(--accent);
-            margin-bottom: 1.1rem;
-        }
-
-        .hero-badge::before {
-            content: '//';
-            color: var(--comment);
-        }
-
-        .hero h1 {
-            font-family: var(--mono);
-            font-size: clamp(1.6rem, 3.6vw, 2.35rem);
-            font-weight: 600;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
-            min-height: 1.6em;
-        }
-
-        .hero h1 .kw { color: var(--accent-purple); }
-        .hero h1 .fn { color: var(--primary); }
-
-        #cursor {
-            display: inline-block;
-            animation: blink 1s step-end infinite;
-            color: var(--accent);
-            font-weight: 400;
-        }
-
-        .typing-done #cursor {
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        .hero p {
-            font-size: 1rem;
-            color: var(--text-muted);
-            max-width: 62ch;
-            margin: 1.3rem 0 1.7rem;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1.7rem;
-        }
-
-        .btn {
-            font-family: var(--mono);
-            font-size: 0.86rem;
-            font-weight: 500;
-            padding: 0.65rem 1.15rem;
-            border-radius: var(--radius-sm);
-            border: 1px solid transparent;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-        }
-
-        .btn::before {
-            content: '▸';
-            font-size: 0.75rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: #14151a;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-neutral {
-            background: var(--bg-gutter);
-            border-color: var(--card-border);
-            color: var(--text);
-        }
-
-        .btn-outline {
-            border-color: var(--card-border);
-            color: var(--text-muted);
-        }
-
-        .btn-neutral:hover,
-        .btn-outline:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-            color: var(--text);
-        }
-
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .chip {
-            font-family: var(--mono);
-            font-size: 0.76rem;
-            padding: 0.3rem 0.65rem;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--card-border);
-            background: var(--bg-gutter);
-            color: var(--text-muted);
-        }
-
-        /* Section layout */
-        .section-frame {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 5rem 1.5rem;
-        }
-
-        .section-header {
-            margin-bottom: 2.6rem;
-            max-width: 640px;
-        }
-
-        .eyebrow {
-            display: block;
-            font-family: var(--mono);
-            font-size: 0.82rem;
-            color: var(--comment);
-            margin-bottom: 0.6rem;
-        }
-
-        .eyebrow .kw { color: var(--accent-purple); }
-
-        .section-header h2 {
-            font-size: clamp(1.7rem, 3vw, 2.15rem);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            margin-bottom: 0.6rem;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-        }
-
-        /* Shared panel look for cards */
-        .card,
-        .project-card,
-        .skill-card,
-        .timeline-card,
-        .contact-card,
-        .education-card {
-            background: var(--bg-panel);
-            border: 1px solid var(--card-border);
-            border-left: 3px solid var(--card-border);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-color 0.25s ease;
-        }
-
-        .card:hover,
-        .project-card:hover,
-        .skill-card:hover,
-        .timeline-card:hover,
-        .contact-card:hover,
-        .education-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-            border-left-color: var(--primary);
-        }
-
-        /* About */
-        .about-wrap {
-            display: grid;
-            gap: clamp(1.4rem, 3vw, 2rem);
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .card {
-            padding: clamp(1.6rem, 3.5vw, 2rem);
-            display: grid;
-            gap: 1rem;
-            align-content: start;
-        }
-
-        .card h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-        }
-
-        .card p {
-            color: var(--text-muted);
-        }
-
-        .stat-list {
-            display: grid;
-            gap: 0.7rem;
-            margin-top: 0.3rem;
-        }
-
-        .stat {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--mono);
-            font-size: 0.86rem;
-            padding-top: 0.6rem;
-            border-top: 1px dashed var(--card-border);
-        }
-
-        .stat:first-child {
-            border-top: none;
-            padding-top: 0;
-        }
-
-        .stat span {
-            color: var(--text-muted);
-        }
-
-        .stat strong {
-            color: var(--primary);
-            font-size: 1rem;
-        }
-
-        .project-list {
-            display: grid;
-            gap: 0.6rem;
-            color: var(--text-muted);
-        }
-
-        .project-list li {
-            display: flex;
-            gap: 0.55rem;
-        }
-
-        .project-list li span:first-child {
-            color: var(--accent);
-            font-family: var(--mono);
-        }
-
-        /* Projects */
-        .project-grid {
-            display: grid;
-            gap: clamp(1.6rem, 3vw, 2.2rem);
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-
-        .project-card {
-            padding: clamp(1.6rem, 4vw, 2rem);
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-        }
-
-        .project-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-family: var(--mono);
-            font-size: 0.72rem;
-            letter-spacing: 0.05em;
-            color: var(--primary);
-            margin-bottom: 0.4rem;
-        }
-
-        .project-card h3 {
-            font-size: 1.25rem;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-            font-weight: 700;
-        }
-
-        .project-card p {
-            color: var(--text-muted);
-        }
-
-        .project-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.45rem;
-        }
-
-        .project-meta .chip {
-            color: var(--text-muted);
-        }
-
-        .project-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: auto;
-            padding-top: 0.4rem;
-        }
-
-        .project-links a {
-            font-family: var(--mono);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--primary-strong);
-        }
-
-        .project-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Skills */
-        .skill-grid {
-            display: grid;
-            gap: clamp(1.4rem, 3vw, 2rem);
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .skill-card {
-            padding: clamp(1.5rem, 3.5vw, 1.9rem);
-            display: grid;
-            gap: 0.9rem;
-            align-content: start;
-        }
-
-        .skill-card h3 {
-            font-family: var(--mono);
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--accent-purple);
-        }
-
-        .skill-list {
-            display: grid;
-            gap: 0.55rem;
-        }
-
-        .skill-list li {
-            display: flex;
-            gap: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.94rem;
-        }
-
-        .skill-list li span:first-child {
-            color: var(--accent);
-            font-family: var(--mono);
-        }
-
-        /* Experience timeline */
-        .timeline {
-            display: grid;
-            gap: 1.6rem;
-            position: relative;
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 16px 1fr;
-            gap: 1.2rem;
-        }
-
-        .timeline-marker {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--primary);
-            margin-top: 1.6rem;
-            position: relative;
-        }
-
-        .timeline-marker::after {
-            content: '';
-            position: absolute;
-            top: 14px;
-            left: 4px;
-            width: 1px;
-            height: calc(100% + 30px);
-            background: var(--card-border);
-        }
-
-        .timeline-item:last-child .timeline-marker::after {
-            display: none;
-        }
-
-        .timeline-card {
-            padding: clamp(1.5rem, 3.5vw, 1.9rem);
-            display: grid;
-            gap: 0.85rem;
-        }
-
-        .timeline-card header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 0.75rem;
-            align-items: baseline;
-        }
-
-        .timeline-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .timeline-card header span {
-            color: var(--text-muted);
-            font-family: var(--mono);
-            font-size: 0.82rem;
-        }
-
-        .timeline-card ul {
-            color: var(--text-muted);
-            display: grid;
-            gap: 0.55rem;
-        }
-
-        .timeline-card ul li strong {
-            color: var(--text);
-        }
-
-        /* Education */
-        .education-card {
-            padding: clamp(1.6rem, 3.5vw, 2rem);
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-            align-items: flex-start;
-        }
-
-        .education-card strong {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .education-card span {
-            color: var(--text-muted);
-            font-family: var(--mono);
-            font-size: 0.85rem;
-        }
-
-        .education-card .chip {
-            color: var(--primary);
-        }
-
-        .education-card p {
-            color: var(--text-muted);
-        }
-
-        /* Contact / Languages */
-        .contact-grid {
-            display: grid;
-            gap: clamp(1.2rem, 3vw, 1.8rem);
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        }
-
-        .contact-card {
-            padding: clamp(1.5rem, 3.5vw, 1.8rem);
-            display: grid;
-            gap: 0.5rem;
-        }
-
-        .contact-card small {
-            text-transform: uppercase;
-            font-family: var(--mono);
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            font-size: 0.72rem;
-            color: var(--comment);
-        }
-
-        .contact-card a {
-            font-weight: 600;
-            font-family: var(--mono);
-            font-size: 0.95rem;
-            color: var(--primary-strong);
-        }
-
-        .contact-card p {
-            color: var(--text-muted);
-            font-size: 0.92rem;
-        }
-
-        .footer {
-            padding: 2.2rem 1.5rem 3.2rem;
-            text-align: center;
-            color: var(--comment);
-            font-family: var(--mono);
-            font-size: 0.82rem;
-            border-top: 1px solid var(--card-border);
-            margin-top: 2rem;
-        }
-
-        .footer span {
-            display: block;
-            margin-top: 0.4rem;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 960px) {
-            .nav-links {
-                position: fixed;
-                top: 64px;
-                left: 0;
-                right: 1.5rem;
-                margin-left: auto;
-                width: min(280px, 80vw);
-                flex-direction: column;
-                align-items: stretch;
-                background: var(--bg-panel);
-                border: 1px solid var(--card-border);
-                border-radius: var(--radius-md);
-                padding: 0.6rem;
-                box-shadow: var(--shadow-lg);
-                transform: translateY(-12px);
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.25s ease, transform 0.25s ease;
-            }
-
-            .nav-links.open {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-            }
-
-            .nav-links a {
-                border-radius: var(--radius-sm);
-                border-bottom: 1px solid transparent;
-            }
-
-            .nav-links a.nav-cta {
-                margin-left: 0;
-                margin-top: 0.3rem;
-                justify-content: center;
-            }
-
-            .theme-toggle span:last-child {
-                display: none;
-            }
-
-            .mobile-trigger {
-                display: flex;
-            }
-
-            .hero-body {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-gutter {
-                display: none;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .nav-container {
-                padding: 0.8rem 1.2rem;
-            }
-
-            .hero {
-                padding: 6.5rem 1rem 3.5rem;
-            }
-
-            .hero-body {
-                padding: 1.8rem 1.3rem;
-            }
-
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .section-frame {
-                padding: 3.5rem 1.2rem;
-            }
-
-            .project-card,
-            .skill-card,
-            .timeline-card,
-            .card,
-            .contact-card,
-            .education-card {
-                padding: 1.4rem;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .hero h1 {
-                font-size: 1.3rem;
-            }
-
-            .brand span {
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jesser Hamdi is a Software Engineer building mobile (Flutter), AI/OCR and data systems.">
+<meta name="author" content="Jesser Hamdi">
+<meta name="keywords" content="Flutter, Software Engineer, OCR, Python, FastAPI, Jesser Hamdi, SalahMate, Apex OCR">
+<title>Jesser Hamdi · Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f4f5f9;--panel:#fff;--gutter:#eceef4;--text:#1a1d27;--muted:#5c6272;--comment:#8b90a0;--border:#e2e4ee;--primary:#b8790c;--primary-strong:#96620a;--accent:#0e9a63;--purple:#6e4fd6;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',sans-serif;--r:10px;--rs:6px;--sh:0 6px 16px rgba(20,24,38,.06);--shm:0 14px 28px rgba(20,24,38,.1);--shl:0 24px 48px rgba(20,24,38,.1);color-scheme:light}
+body[data-theme=dark]{--bg:#0d0f16;--panel:#12141d;--gutter:#191c28;--text:#eceef5;--muted:#9299ad;--comment:#656c81;--border:rgba(255,255,255,.08);--primary:#e8ac48;--primary-strong:#f4c46e;--accent:#5fd6a0;--purple:#a68bfb;--sh:0 6px 16px rgba(0,0,0,.3);--shm:0 14px 28px rgba(0,0,0,.4);--shl:0 24px 48px rgba(0,0,0,.45);color-scheme:dark}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;transition:background .35s,color .35s;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(600px 400px at 85% -5%,color-mix(in srgb,var(--primary) 14%,transparent),transparent),radial-gradient(500px 400px at 0% 30%,color-mix(in srgb,var(--purple) 10%,transparent),transparent)}
+a{color:inherit;text-decoration:none}ul{list-style:none}main{position:relative;z-index:2}
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--primary),var(--purple));z-index:200}
+nav{position:fixed;inset:0 0 auto 0;backdrop-filter:blur(14px);border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 86%,transparent);z-index:100}
+.nav-container{max-width:1180px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.brand{display:flex;align-items:center;gap:.7rem;font:600 .95rem var(--mono)}
+.brand-mark{width:36px;height:36px;border-radius:var(--rs);background:var(--gutter);border:1px solid var(--border);display:grid;place-items:center;color:var(--primary);font-size:.85rem}
+.brand span{color:var(--muted)}.brand span::before{content:'~/';color:var(--comment)}
+.nav-links{display:flex;align-items:center;gap:.35rem;font:500 .83rem var(--mono);color:var(--muted)}
+.nav-links a{padding:.5rem .75rem;border-radius:var(--rs) var(--rs) 0 0;border-bottom:2px solid transparent;transition:.25s}
+.nav-links a:hover,.nav-links a.active{background:var(--gutter);border-bottom-color:var(--primary);color:var(--text)}
+.nav-links a.nav-cta{margin-left:.4rem;border:1px solid var(--border);border-radius:999px;background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--primary-strong);font-weight:600}
+.theme-toggle{border:1px solid var(--border);border-radius:var(--rs);padding:.4rem .8rem;background:var(--gutter);color:var(--text);font:500 .82rem var(--mono);cursor:pointer;transition:.2s}
+.theme-toggle:hover{transform:translateY(-1px)}
+.mobile-trigger{display:none;flex-direction:column;gap:.28rem;cursor:pointer;padding:.55rem;border-radius:var(--rs);background:var(--gutter);border:1px solid var(--border)}
+.mobile-trigger span{width:18px;height:2px;background:var(--text);display:block}
+.hero{padding:clamp(7.5rem,12vw,9.5rem) 1.5rem 4rem}
+.hero-inner{max-width:880px;margin:0 auto;border:1px solid var(--border);border-radius:14px;background:var(--panel);box-shadow:var(--shl);overflow:hidden}
+.hero-titlebar{display:flex;align-items:center;gap:.9rem;padding:.85rem 1.3rem;border-bottom:1px solid var(--border);background:var(--gutter)}
+.hero-dots{display:flex;gap:.4rem}.hero-dots span{width:10px;height:10px;border-radius:50%}
+.hero-dots span:nth-child(1){background:#f28b82}.hero-dots span:nth-child(2){background:#fbbc57}.hero-dots span:nth-child(3){background:#81c995}
+.hero-filename{font:.8rem var(--mono);color:var(--muted)}
+.hero-body{display:grid;grid-template-columns:auto 1fr;padding:2.4rem clamp(1.5rem,4vw,3rem);gap:1.5rem}
+.hero-gutter{font:.8rem/1.9 var(--mono);color:var(--comment);text-align:right;user-select:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;font:.78rem var(--mono);color:var(--accent);margin-bottom:1.1rem}
+.hero-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font:600 clamp(1.6rem,3.6vw,2.35rem)/1.4 var(--mono);letter-spacing:-.01em;min-height:2.8em;background:linear-gradient(100deg,var(--text) 40%,var(--primary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#cursor{display:inline-block;animation:blink 1s step-end infinite;-webkit-text-fill-color:var(--accent);font-weight:400}
+@keyframes blink{50%{opacity:0}}
+.hero p{color:var(--muted);max-width:62ch;margin:1.1rem 0 1.7rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.7rem}
+.btn{font:500 .86rem var(--mono);padding:.65rem 1.15rem;border-radius:var(--rs);border:1px solid transparent;display:inline-flex;align-items:center;gap:.5rem;transition:.2s}
+.btn::before{content:'▸';font-size:.75rem}
+.btn-primary{background:var(--primary);color:#14151a;box-shadow:var(--sh)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px color-mix(in srgb,var(--primary) 45%,transparent)}
+.btn-neutral{background:var(--gutter);border-color:var(--border)}
+.btn-outline{border-color:var(--border);color:var(--muted)}
+.btn-neutral:hover,.btn-outline:hover{transform:translateY(-2px);border-color:var(--primary);color:var(--text)}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{font:.76rem var(--mono);padding:.3rem .65rem;border-radius:var(--rs);border:1px solid var(--border);background:var(--gutter);color:var(--muted);transition:.2s}
+.chip:hover{border-color:var(--primary);color:var(--text)}
+.section-frame{max-width:1180px;margin:0 auto;padding:4.5rem 1.5rem}
+.section-header{margin-bottom:2.4rem;max-width:640px}
+.eyebrow{display:block;font:.82rem var(--mono);color:var(--comment);margin-bottom:.6rem}
+.section-header h2{font-size:clamp(1.7rem,3vw,2.15rem);font-weight:700;letter-spacing:-.01em;margin-bottom:.6rem;display:inline-block;background:linear-gradient(100deg,var(--text) 55%,var(--primary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section-header p{color:var(--muted)}
+.card,.project-card,.skill-card,.timeline-card,.mini-card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);transition:transform .25s,box-shadow .25s,border-left-color .25s}
+.card:hover,.project-card:hover,.skill-card:hover,.timeline-card:hover,.mini-card:hover{transform:translateY(-3px);box-shadow:var(--shm);border-left-color:var(--primary)}
+.grid{display:grid;gap:1.8rem}
+.about-wrap{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{padding:1.8rem;display:grid;gap:1rem;align-content:start}
+.card h3{font-size:1.15rem}.card p{color:var(--muted)}
+.stat{display:flex;justify-content:space-between;font:.86rem var(--mono);padding-top:.6rem;border-top:1px dashed var(--border)}
+.stat:first-child{border-top:none;padding-top:0}.stat span{color:var(--muted)}.stat strong{color:var(--primary);font-size:1rem}
+.bullets{display:grid;gap:.6rem;color:var(--muted)}
+.bullets li{display:flex;gap:.55rem}.bullets li::before{content:'▹';color:var(--accent);font-family:var(--mono)}
+.skill-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.skill-card{padding:1.6rem;display:grid;gap:.9rem;align-content:start}
+.skill-card h3{font:600 .95rem var(--mono);color:var(--purple)}
+.timeline{display:grid;gap:1.6rem}
+.timeline-item{display:grid;grid-template-columns:16px 1fr;gap:1.2rem}
+.timeline-marker{width:10px;height:10px;border-radius:50%;background:var(--primary);margin-top:1.6rem;position:relative;box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 20%,transparent)}
+.timeline-marker::after{content:'';position:absolute;top:14px;left:4px;width:1px;height:calc(100% + 40px);background:var(--border)}
+.timeline-item:last-child .timeline-marker::after{display:none}
+.timeline-card{padding:1.7rem;display:grid;gap:.85rem}
+.timeline-card header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem;align-items:baseline}
+.timeline-card h3{font-size:1.1rem}.timeline-card header span,.sub{color:var(--muted);font:.82rem var(--mono)}
+.timeline-card .bullets strong{color:var(--text)}
+.project-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.project-card{padding:1.8rem;display:flex;flex-direction:column;gap:1.1rem}
+.project-label{font:.72rem var(--mono);letter-spacing:.05em;color:var(--primary);display:block;margin-bottom:.4rem}
+.project-card h3{font-size:1.25rem;line-height:1.3;margin-bottom:.5rem;font-weight:700}
+.project-card p{color:var(--muted)}
+.project-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:auto}
+.project-links a{font:600 .85rem var(--mono);color:var(--primary-strong)}.project-links a:hover{text-decoration:underline}
+.mini-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.mini-card{padding:1.5rem;display:grid;gap:.4rem}
+.mini-card strong{font-size:1.05rem}.mini-card p{color:var(--muted);font-size:.92rem}
+.mini-card a{font:600 .92rem var(--mono);color:var(--primary-strong);word-break:break-all}
+.mini-card small{text-transform:uppercase;font:600 .72rem var(--mono);letter-spacing:.14em;color:var(--comment)}
+.footer{padding:2.2rem 1.5rem 3rem;text-align:center;color:var(--comment);font:.82rem var(--mono);border-top:1px solid var(--border);margin-top:2rem;position:relative;z-index:2}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:960px){
+.nav-links{position:fixed;top:64px;right:1.5rem;width:min(280px,80vw);flex-direction:column;align-items:stretch;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:.6rem;box-shadow:var(--shl);transform:translateY(-12px);opacity:0;pointer-events:none;transition:.25s}
+.nav-links.open{opacity:1;transform:none;pointer-events:auto}
+.nav-links a{border-radius:var(--rs)}.nav-links a.nav-cta{margin:.3rem 0 0;text-align:center}
+.theme-toggle span:last-child{display:none}.mobile-trigger{display:flex}
+.hero-body{grid-template-columns:1fr}.hero-gutter{display:none}}
+@media(max-width:640px){.nav-container{padding:.8rem 1.2rem}.hero{padding:6.5rem 1rem 3rem}.hero-body{padding:1.8rem 1.3rem}.section-frame{padding:3.2rem 1.2rem}.card,.project-card,.skill-card,.timeline-card{padding:1.4rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
-
 <body data-theme="light">
-    <nav>
-        <div class="nav-container">
-            <a class="brand" href="#top" aria-label="Back to top">
-                <div class="brand-mark">JH</div>
-                <span>jesser</span>
-            </a>
-            <div class="nav-links" id="navLinks">
-                <a href="#about">about.md</a>
-                <a href="#skills">skills.json</a>
-                <a href="#experience">experience.log</a>
-                <a href="#projects">projects/</a>
-                <a href="#education">education.md</a>
-                <a href="#contact">contact.sh</a>
-                <a href="app_page.html" class="nav-cta">SalahMate App ↗</a>
-            </div>
-            <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false">
-                <span id="themeIcon">🌙</span>
-                <span id="themeLabel">Dark</span>
-            </button>
-            <button class="mobile-trigger" id="mobileTrigger" type="button" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+<div id="progress"></div>
+<nav>
+<div class="nav-container">
+<a class="brand" href="#top" aria-label="Back to top"><div class="brand-mark">JH</div><span>jesser</span></a>
+<div class="nav-links" id="navLinks">
+<a href="#about">about.md</a><a href="#skills">skills.json</a><a href="#experience">experience.log</a><a href="#projects">projects/</a><a href="#education">education.md</a><a href="#contact">contact.sh</a>
+<a href="app_page.html" class="nav-cta">SalahMate App ↗</a>
+</div>
+<button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false"><span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span></button>
+<button class="mobile-trigger" id="mobileTrigger" type="button" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+</div>
+</nav>
 
-    <main>
-        <section class="hero" id="top">
-            <div class="hero-inner reveal">
-                <div class="hero-titlebar">
-                    <div class="hero-dots"><span></span><span></span><span></span></div>
-                    <span class="hero-filename">jesser_hamdi.dart</span>
-                </div>
-                <div class="hero-body">
-                    <div class="hero-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5<br>6<br>7</div>
-                    <div class="hero-code">
-                        <div class="hero-badge">
-                            <span>actively seeking full-time software engineering roles</span>
-                        </div>
-                        <h1 id="heroTitle"><span id="typed-text"></span><span id="cursor">|</span></h1>
-                        <p>I'm Jesser Hamdi, a Software Engineer specializing in Flutter mobile development. I have
-                            hands-on experience building and publishing production-ready applications from concept to
-                            deployment — integrating backend services and applying AI and IoT to solve real-world
-                            problems.</p>
-                        <div class="hero-actions">
-                            <a class="btn btn-primary" href="cv.pdf" download>Download CV</a>
-                            <a class="btn btn-neutral" href="app_page.html">Explore SalahMate App ↗</a>
-                            <a class="btn btn-outline" href="mailto:jasser.hamdi@fsb.ucar.tn">Let’s collaborate</a>
-                        </div>
-                        <div class="hero-tags">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Dart</span>
-                            <span class="chip">Firebase</span>
-                            <span class="chip">TensorFlow Lite</span>
-                            <span class="chip">Spring Boot</span>
-                            <span class="chip">Angular</span>
-                            <span class="chip">Python</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<main>
+<section class="hero" id="top">
+<div class="hero-inner reveal">
+<div class="hero-titlebar"><div class="hero-dots"><span></span><span></span><span></span></div><span class="hero-filename">jesser_hamdi.dart</span></div>
+<div class="hero-body">
+<div class="hero-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5<br>6<br>7</div>
+<div>
+<div class="hero-badge">open to full-time software engineering roles</div>
+<h1><span id="typed-text"></span><span id="cursor">|</span></h1>
+<p>I'm Jesser Hamdi, a Software Engineer with an engineering degree from FSB. I build and publish production Flutter apps, develop OCR and computer-vision pipelines in Python, and work across backend, data and cross-platform development.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="cv.pdf" download="Jesser_Hamdi_CV.pdf">Download CV</a>
+<a class="btn btn-neutral" href="app_page.html">Explore SalahMate App ↗</a>
+<a class="btn btn-outline" href="mailto:jasser.hamdi@fsb.ucar.tn">Let’s collaborate</a>
+</div>
+<div class="tags"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">PyTorch</span><span class="chip">Angular</span><span class="chip">Supabase</span></div>
+</div>
+</div>
+</div>
+</section>
 
-        <section id="about">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// about.md</span>
-                    <h2>Professional Summary</h2>
-                    <p>Software Engineer specializing in Flutter mobile development, with a strong foundation in
-                        software engineering, UI/UX design, and cross-platform development.</p>
-                </div>
-                <div class="about-wrap">
-                    <article class="card reveal">
-                        <h3>What I do</h3>
-                        <p>I build scalable mobile solutions, integrate backend services, and apply AI and IoT
-                            technologies to solve real-world problems — from concept to deployment. I'm eager to bring
-                            technical expertise, problem-solving skills, and continuous learning to a collaborative
-                            software development team.</p>
-                        <ul class="stat-list">
-                            <li class="stat"><span>• Flutter app published on Google Play</span><strong
-                                    class="counter" data-target="1">0</strong></li>
-                            <li class="stat"><span>• Personal Flutter projects shipped</span><strong class="counter"
-                                    data-target="3">0</strong></li>
-                            <li class="stat"><span>• Expected graduation (FSB, Université de Carthage)</span><strong
-                                    class="counter" data-target="2026">2023</strong></li>
-                        </ul>
-                    </article>
-                    <article class="card reveal">
-                        <h3>What I focus on</h3>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Building and publishing production-ready mobile applications from
-                                    concept to deployment.</span></li>
-                            <li><span>▹</span><span>Integrating backend services with mobile front ends for reliable,
-                                    end-to-end products.</span></li>
-                            <li><span>▹</span><span>Applying AI and IoT technologies — such as TensorFlow Lite and
-                                    connected hardware — to practical problems.</span></li>
-                            <li><span>▹</span><span>UI/UX design and cross-platform development focused on
-                                    high-quality, user-focused applications.</span></li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
+<section id="about"><div class="section-frame">
+<div class="section-header reveal"><span class="eyebrow">// about.md</span><h2>Professional Summary</h2>
+<p>Software Engineer specializing in mobile development, AI-powered systems and data processing.</p></div>
+<div class="grid about-wrap">
+<article class="card reveal">
+<h3>What I do</h3>
+<p>I build and ship production Flutter applications, develop OCR and computer-vision pipelines in Python, and work with relational databases and ETL workflows. I'm comfortable across architecture, backend integration and cross-platform development.</p>
+<ul>
+<li class="stat"><span>• Flutter app published on Google Play</span><strong class="counter" data-target="1">0</strong></li>
+<li class="stat"><span>• Projects shipped</span><strong class="counter" data-target="4">0</strong></li>
+<li class="stat"><span>• Languages supported in SalahMate</span><strong class="counter" data-target="7">0</strong></li>
+</ul>
+</article>
+<article class="card reveal">
+<h3>What I focus on</h3>
+<ul class="bullets">
+<li>Production mobile apps, from concept to Google Play release.</li>
+<li>OCR and computer-vision pipelines, with a FastAPI backend and Angular frontend.</li>
+<li>Data workflows: ETL, SQL Server, Power BI and Pandas.</li>
+<li>AI and IoT on real hardware, such as TensorFlow Lite on a BeagleBone greenhouse.</li>
+</ul>
+</article>
+</div>
+</div></section>
 
-        <section id="skills">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// skills.json</span>
-                    <h2>Technical Skills</h2>
-                    <p>The languages, frameworks, and tools I work with across mobile, backend, and data.</p>
-                </div>
-                <div class="skill-grid">
-                    <article class="skill-card reveal">
-                        <h3>Mobile</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Flutter, Dart</span></li>
-                            <li><span>▹</span><span>Android Studio</span></li>
-                            <li><span>▹</span><span>Firebase, TensorFlow Lite</span></li>
-                        </ul>
-                    </article>
+<section id="skills"><div class="section-frame">
+<div class="section-header reveal"><span class="eyebrow">// skills.json</span><h2>Technical Skills</h2><p>The languages, frameworks and tools I work with across mobile, AI, backend and data.</p></div>
+<div class="grid skill-grid">
+<article class="skill-card reveal"><h3>Programming</h3><div class="tags"><span class="chip">Python</span><span class="chip">Dart</span><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">C</span><span class="chip">SQL</span></div></article>
+<article class="skill-card reveal"><h3>AI &amp; Data</h3><div class="tags"><span class="chip">OCR</span><span class="chip">Computer Vision</span><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">EasyOCR</span><span class="chip">TensorFlow Lite</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">ETL</span></div></article>
+<article class="skill-card reveal"><h3>Mobile &amp; Frontend</h3><div class="tags"><span class="chip">Flutter</span><span class="chip">Android</span><span class="chip">Angular</span><span class="chip">React.js</span><span class="chip">HTML</span><span class="chip">CSS</span></div></article>
+<article class="skill-card reveal"><h3>Backend &amp; APIs</h3><div class="tags"><span class="chip">FastAPI</span><span class="chip">Spring Boot</span><span class="chip">Express.js</span><span class="chip">REST APIs</span><span class="chip">SQLAlchemy</span><span class="chip">JDBC</span></div></article>
+<article class="skill-card reveal"><h3>Databases</h3><div class="tags"><span class="chip">SQL Server</span><span class="chip">Supabase</span><span class="chip">Firebase Firestore</span></div></article>
+<article class="skill-card reveal"><h3>Tools</h3><div class="tags"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Figma</span><span class="chip">Power BI</span><span class="chip">Android Studio</span><span class="chip">LaTeX</span><span class="chip">Agile/Scrum</span></div></article>
+</div>
+</div></section>
 
-                    <article class="skill-card reveal">
-                        <h3>Backend &amp; Web</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Spring Boot, Express.js, Jakarta EE</span></li>
-                            <li><span>▹</span><span>Java, JavaScript, Python, C</span></li>
-                        </ul>
-                    </article>
+<section id="experience"><div class="section-frame">
+<div class="section-header reveal"><span class="eyebrow">// experience.log</span><h2>Experience</h2><p>Industry work that shaped how I deliver software.</p></div>
+<div class="timeline">
+<div class="timeline-item reveal"><div class="timeline-marker"></div>
+<article class="timeline-card">
+<header><div><h3>Final-Year Project (PFE) — Apex OCR</h3><span class="sub">OneTech · Tunisia</span></div><span>2026</span></header>
+<ul class="bullets">
+<li>Designed and built a production-ready full-stack system for extracting handwritten and printed data from French industrial inventory documents.</li>
+<li>Developed a <strong>FastAPI</strong> backend and an <strong>Angular</strong> frontend with a guided upload flow, live progress tracking and a match/no-match review interface.</li>
+<li>Trained a custom <strong>PyTorch CNN</strong> digit classifier reaching 99.6% test accuracy on handwritten digits across multiple public datasets.</li>
+<li>Built a multi-stage Python pipeline (preprocessing, segmentation, recognition) with parallel page processing using <strong>OpenCV</strong> and <strong>EasyOCR</strong>.</li>
+</ul>
+</article></div>
+<div class="timeline-item reveal"><div class="timeline-marker"></div>
+<article class="timeline-card">
+<header><div><h3>Summer Intern</h3><span class="sub">SAGEMCOM · Tunis, Tunisia</span></div><span>July 2024</span></header>
+<ul class="bullets">
+<li>Built an <strong>ETL pipeline</strong> to extract, transform and load business data.</li>
+<li>Developed BI workflows and <strong>Power BI</strong> dashboards using SQL Server and Python (Pandas).</li>
+<li>Automated parts of the data preparation and reporting process in an industrial context.</li>
+</ul>
+</article></div>
+</div>
+</div></section>
 
-                    <article class="skill-card reveal">
-                        <h3>Frontend</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>React.js, Angular</span></li>
-                            <li><span>▹</span><span>HTML, CSS, TypeScript</span></li>
-                        </ul>
-                    </article>
+<section id="projects"><div class="section-frame">
+<div class="section-header reveal"><span class="eyebrow">// projects/</span><h2>Projects</h2><p>A closer look at what I've built.</p></div>
+<div class="grid project-grid">
+<article class="project-card reveal">
+<div><span class="project-label">Mobile · Published</span><h3>SalahMate — Islamic companion app</h3>
+<p>Production cross-platform app with prayer times, Quran reading and audio playback, adhkar, Qibla compass, Hijri calendar and customizable notifications.</p></div>
+<ul class="bullets">
+<li>Multilingual: Arabic, English, French, Urdu, Bengali, Turkish and Indonesian.</li>
+<li>Responsive UI scaling, dynamic themes (light, dark, black) and battery-optimized background services.</li>
+<li>On-device prayer calculations, Qibla direction and notification scheduling, shipped through multiple releases.</li>
+</ul>
+<div class="tags"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Supabase</span></div>
+<div class="project-links"><a href="app_page.html">App website →</a><a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en" target="_blank" rel="noopener">Play Store →</a></div>
+</article>
+<article class="project-card reveal">
+<div><span class="project-label">AI · Full-stack</span><h3>Apex OCR — industrial document OCR</h3>
+<p>PFE project for OneTech: a production OCR system for French inventory documents.</p></div>
+<ul class="bullets">
+<li>Custom PyTorch CNN for handwritten digits, 99.6% test accuracy.</li>
+<li>Parallel multi-stage Python pipeline with FastAPI and an Angular review UI.</li>
+</ul>
+<div class="tags"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">FastAPI</span><span class="chip">Angular</span><span class="chip">OpenCV</span></div>
+</article>
+<article class="project-card reveal">
+<div><span class="project-label">IoT · AI</span><h3>PlantCare — smart greenhouse</h3>
+<p>Greenhouse system built with BeagleBone, a Flutter app and a Firebase backend.</p></div>
+<ul class="bullets">
+<li>Live temperature, humidity, light and pressure data, with configurable thresholds and alerts.</li>
+<li>TensorFlow Lite model for plant disease detection from images.</li>
+</ul>
+<div class="tags"><span class="chip">Flutter</span><span class="chip">Firebase</span><span class="chip">TensorFlow Lite</span><span class="chip">BeagleBone</span></div>
+</article>
+<article class="project-card reveal">
+<div><span class="project-label">Mobile · Gamified Learning</span><h3>Flag Frenzy — geography quiz game</h3>
+<p>Educational quiz app with multiple modes, achievements, daily rewards and a coin economy.</p></div>
+<ul class="bullets">
+<li>Google Sign-In and cloud profile sync with Supabase.</li>
+<li>Progression engine and ad monetization.</li>
+</ul>
+<div class="tags"><span class="chip">Flutter</span><span class="chip">Supabase</span><span class="chip">Google Sign-In</span></div>
+</article>
+</div>
+</div></section>
 
-                    <article class="skill-card reveal">
-                        <h3>Data &amp; Analytics</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Pandas, NumPy</span></li>
-                            <li><span>▹</span><span>Power BI</span></li>
-                            <li><span>▹</span><span>Business Intelligence concepts</span></li>
-                        </ul>
-                    </article>
+<section id="education"><div class="section-frame">
+<div class="section-header reveal"><span class="eyebrow">// education.md</span><h2>Education &amp; Certifications</h2></div>
+<div class="grid mini-grid">
+<article class="mini-card reveal"><small>Degree</small><strong>Engineering Degree in Software Engineering</strong><p>Faculté des Sciences de Bizerte (FSB), Université de Carthage · 2023 – 2026</p></article>
+<article class="mini-card reveal"><small>Certification</small><strong>AI Engineer for Developers Associate</strong><p>DataCamp</p></article>
+<article class="mini-card reveal"><small>Languages</small><strong>Arabic · English · French</strong><p>Native · Fluent · Intermediate</p></article>
+</div>
+</div></section>
 
-                    <article class="skill-card reveal">
-                        <h3>Databases</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>SQL Server</span></li>
-                            <li><span>▹</span><span>Firebase Firestore</span></li>
-                            <li><span>▹</span><span>SQLAlchemy, JDBC</span></li>
-                        </ul>
-                    </article>
+<section id="contact"><div class="section-frame">
+<div class="section-header reveal"><span class="eyebrow">// contact.sh</span><h2>Let’s Collaborate</h2><p>Share a role, project brief or a tricky integration challenge. I'd be glad to talk.</p></div>
+<div class="grid mini-grid">
+<article class="mini-card reveal"><small>Email</small><a href="mailto:jasser.hamdi@fsb.ucar.tn">jasser.hamdi@fsb.ucar.tn</a><p>Best for roles, project briefs and partnerships.</p></article>
+<article class="mini-card reveal"><small>LinkedIn</small><a href="https://linkedin.com/in/jesser-hamdi-5b071a238" target="_blank" rel="noopener">linkedin.com/in/jesser-hamdi-5b071a238</a><p>Let’s connect for updates and collaborations.</p></article>
+<article class="mini-card reveal"><small>Phone</small><a href="tel:+21658322998">+216 58 322 998</a><p>Call or message anytime.</p></article>
+</div>
+</div></section>
+</main>
 
-                    <article class="skill-card reveal">
-                        <h3>Tools &amp; Others</h3>
-                        <ul class="skill-list">
-                            <li><span>▹</span><span>Git, Version Control</span></li>
-                            <li><span>▹</span><span>Figma, LaTeX</span></li>
-                            <li><span>▹</span><span>UI scaling scripts, Agile/Scrum workflows</span></li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
+<footer class="footer"><p>© <span id="year"></span> Jesser Hamdi. Designed and coded in Flutter spirit.</p></footer>
 
-        <section id="experience">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// experience.log</span>
-                    <h2>Experience</h2>
-                    <p>Roles and long-running initiatives that shaped how I deliver software.</p>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item reveal">
-                        <div class="timeline-marker" aria-hidden="true"></div>
-                        <article class="timeline-card">
-                            <header>
-                                <div>
-                                    <h3>Summer Intern</h3>
-                                    <span>SAGEMCOM · Tunis, Tunisia</span>
-                                </div>
-                                <span>July 2024</span>
-                            </header>
-                            <ul>
-                                <li>Built an ETL pipeline to extract, transform, and load business data.</li>
-                                <li>Developed BI workflows and dashboards using SQL Server, Power BI, and Python
-                                    (Pandas).</li>
-                                <li>Strengthened understanding of data analytics and automation in industrial
-                                    contexts.</li>
-                            </ul>
-                        </article>
-                    </div>
+<script>
+const body=document.body,$=id=>document.getElementById(id);
+const applyTheme=t=>{body.dataset.theme=t;const d=t==='dark';$('themeToggle').setAttribute('aria-pressed',d);$('themeIcon').textContent=d?'☀️':'🌙';$('themeLabel').textContent=d?'Light':'Dark'};
+const dark=matchMedia('(prefers-color-scheme: dark)');
+let saved=null;try{saved=localStorage.getItem('theme-preference')}catch(e){}
+if(saved)applyTheme(saved);else if(dark.matches)applyTheme('dark');
+$('themeToggle').addEventListener('click',()=>{const n=body.dataset.theme==='dark'?'light':'dark';applyTheme(n);try{localStorage.setItem('theme-preference',n)}catch(e){}});
+$('mobileTrigger').addEventListener('click',()=>$('navLinks').classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>$('navLinks').classList.remove('open')));
 
-                    <div class="timeline-item reveal">
-                        <div class="timeline-marker" aria-hidden="true"></div>
-                        <article class="timeline-card">
-                            <header>
-                                <div>
-                                    <h3>Flutter Developer</h3>
-                                    <span>Personal Projects</span>
-                                </div>
-                                <span>2022 – Present</span>
-                            </header>
-                            <ul>
-                                <li><strong>SalahMate:</strong> full-featured Islamic app with prayer times, Quran
-                                    reading and audio playback, adhkar, Qibla compass, Hijri calendar, and
-                                    customizable notifications — published on the Google Play Store.</li>
-                                <li><strong>PlantCare (IoT &amp; AI):</strong> smart greenhouse system built with
-                                    BeagleBone, integrating a Flutter frontend, Firebase backend, and a TensorFlow
-                                    Lite plant disease detection module.</li>
-                                <li><strong>Flag Frenzy:</strong> gamified educational app with quiz modes,
-                                    achievements, a coin economy, and Supabase/Google Sign-In profile sync.</li>
-                            </ul>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
+// reveal with stagger
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const sib=[...e.target.parentNode.children].filter(c=>c.classList.contains('reveal'));e.target.style.transitionDelay=(sib.indexOf(e.target)*0.1)+'s';e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.14,rootMargin:'0px 0px -10%'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-        <section id="projects">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// projects/</span>
-                    <h2>Projects</h2>
-                    <p>The three personal Flutter projects referenced above, in more detail.</p>
-                </div>
-                <div class="project-grid">
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Mobile · Published</span>
-                            <h3>SalahMate — Islamic companion app</h3>
-                            <p>Full-featured Islamic app providing prayer times, Quran reading and audio playback,
-                                adhkar, Qibla compass, Hijri calendar, and customizable notifications.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Multi-language support (Arabic, English, French) with UI scaling
-                                    for all devices.</span></li>
-                            <li><span>▹</span><span>Dynamic theming (light, dark, black) and battery-optimized
-                                    background services.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Firebase</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="app_page.html">App website →</a>
-                            <a href="https://play.google.com/store/apps/details?id=com.GroveReaper.salahmate.salahmate&hl=en"
-                                target="_blank" rel="noopener">Play Store →</a>
-                        </div>
-                    </article>
+// typing
+const full='Software Engineer building mobile, AI & data systems.',tt=$('typed-text');let i=0;
+(function type(){if(i<full.length){tt.textContent+=full[i++];setTimeout(type,45)}})();
 
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">IoT · AI</span>
-                            <h3>PlantCare — smart greenhouse system</h3>
-                            <p>Smart greenhouse system built with BeagleBone, integrating a Flutter frontend and
-                                Firebase backend.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Live sensor data visualization — temperature, humidity, light,
-                                    and pressure.</span></li>
-                            <li><span>▹</span><span>Configurable thresholds with alerts, plus a TensorFlow Lite
-                                    module for plant disease detection via image analysis.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Firebase</span>
-                            <span class="chip">TensorFlow Lite</span>
-                            <span class="chip">BeagleBone</span>
-                        </div>
-                    </article>
+// counters
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.querySelectorAll('.counter').forEach(c=>{const t=+c.dataset.target,s=Math.max(t/90,.05);let v=0;(function u(){v+=s;if(v<t){c.textContent=Math.floor(v);requestAnimationFrame(u)}else c.textContent=t})()});co.unobserve(e.target)}),{threshold:.5});
+document.querySelectorAll('.card').forEach(c=>co.observe(c));
 
-                    <article class="project-card reveal">
-                        <div class="project-top">
-                            <span class="project-label">Mobile · Gamified Learning</span>
-                            <h3>Flag Frenzy — quiz &amp; geography game</h3>
-                            <p>Gamified educational app with multiple quiz modes, achievements, daily rewards, and a
-                                coin economy.</p>
-                        </div>
-                        <ul class="project-list">
-                            <li><span>▹</span><span>Profile synchronization using Supabase and Google Sign-In.</span>
-                            </li>
-                            <li><span>▹</span><span>Progression engine and ad monetization built for an engaging
-                                    user experience.</span></li>
-                        </ul>
-                        <div class="project-meta">
-                            <span class="chip">Flutter</span>
-                            <span class="chip">Supabase</span>
-                            <span class="chip">Google Sign-In</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="education">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// education.md</span>
-                    <h2>Education</h2>
-                    <p>Engineering fundamentals grounding my technical work.</p>
-                </div>
-                <article class="card education-card reveal">
-                    <strong>Engineering Degree in Software Engineering</strong>
-                    <span>Faculté des Sciences de Bizerte (FSB), Université de Carthage</span>
-                    <span class="chip">Expected 2026</span>
-                    <p>Bizerte, Tunisia. Enrolled since 2023.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="languages">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// languages.md</span>
-                    <h2>Languages</h2>
-                </div>
-                <div class="contact-grid">
-                    <article class="contact-card reveal">
-                        <small>Arabic</small>
-                        <p>Native</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>English</small>
-                        <p>Fluent</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>French</small>
-                        <p>Intermediate</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="section-frame">
-                <div class="section-header reveal">
-                    <span class="eyebrow">// contact.sh</span>
-                    <h2>Let’s Collaborate</h2>
-                    <p>Share a role, project brief, or a complex integration challenge — happy to explore how I can
-                        help.</p>
-                </div>
-                <div class="contact-grid">
-                    <article class="contact-card reveal">
-                        <small>Email</small>
-                        <a href="mailto:jasser.hamdi@fsb.ucar.tn">jasser.hamdi@fsb.ucar.tn</a>
-                        <p>Best for role opportunities, project briefs, and partnership ideas.</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>LinkedIn</small>
-                        <a href="https://linkedin.com/in/jesser-hamdi-5b071a238" target="_blank"
-                            rel="noopener">linkedin.com/in/jesser-hamdi-5b071a238</a>
-                        <p>Let’s connect for professional updates and collaborations.</p>
-                    </article>
-                    <article class="contact-card reveal">
-                        <small>Phone</small>
-                        <a href="tel:+21658322998">+216 58 322 998</a>
-                        <p>Call or message anytime — you’ll hear back soon.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <p>© <span id="year"></span> Jesser Hamdi. Designed and coded in Flutter spirit.</p>
-        <span>Built with love for purposeful technology.</span>
-    </footer>
-
-    <script>
-        const body = document.body;
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeLabel = document.getElementById('themeLabel');
-        const mobileTrigger = document.getElementById('mobileTrigger');
-        const navLinks = document.getElementById('navLinks');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-        const applyTheme = (theme) => {
-            body.setAttribute('data-theme', theme);
-            const isDark = theme === 'dark';
-            themeToggle?.setAttribute('aria-pressed', String(isDark));
-            if (themeIcon) {
-                themeIcon.textContent = isDark ? '☀️' : '🌙';
-            }
-            if (themeLabel) {
-                themeLabel.textContent = isDark ? 'Light' : 'Dark';
-            }
-        };
-
-        const storedTheme = localStorage.getItem('theme-preference');
-        if (storedTheme) {
-            applyTheme(storedTheme);
-        } else if (prefersDark.matches) {
-            applyTheme('dark');
-        }
-
-        themeToggle?.addEventListener('click', () => {
-            const current = body.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            applyTheme(next);
-            localStorage.setItem('theme-preference', next);
-        });
-
-        prefersDark.addEventListener('change', (event) => {
-            if (!localStorage.getItem('theme-preference')) {
-                applyTheme(event.matches ? 'dark' : 'light');
-            }
-        });
-
-        mobileTrigger?.addEventListener('click', () => {
-            navLinks?.classList.toggle('open');
-        });
-
-        navLinks?.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => navLinks.classList.remove('open'));
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener('click', (event) => {
-                const targetId = anchor.getAttribute('href');
-                if (!targetId || targetId.length === 1) {
-                    return;
-                }
-                event.preventDefault();
-                const target = document.querySelector(targetId);
-                target?.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    // Add stagger delay for grid items
-                    const parent = entry.target.parentNode;
-                    if (parent && (parent.classList.contains('project-grid') || parent.classList.contains('skill-grid') || parent.classList.contains('contact-grid'))) {
-                        const siblings = Array.from(parent.children).filter(child => child.classList.contains('reveal'));
-                        const index = siblings.indexOf(entry.target);
-                        entry.target.style.animationDelay = `${index * 0.2}s`;
-                    }
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.14, rootMargin: '0px 0px -12%' });
-
-        document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-
-        // Typing animation for hero title
-        const heroTitle = document.getElementById('heroTitle');
-        const typedText = document.getElementById('typed-text');
-        const cursor = document.getElementById('cursor');
-        const fullText = "Software Engineer specializing in Flutter mobile development.";
-        let index = 0;
-        const typeSpeed = 50; // ms per character
-
-        function typeWriter() {
-            if (index < fullText.length) {
-                typedText.textContent += fullText.charAt(index);
-                index++;
-                setTimeout(typeWriter, typeSpeed);
-            } else {
-                // Stop cursor blinking
-                heroTitle.classList.add('typing-done');
-            }
-        }
-
-        // Start typing after a short delay
-        setTimeout(typeWriter, 1000);
-
-        // Counter animation
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const counters = entry.target.querySelectorAll('.counter');
-                    counters.forEach((counter) => {
-                        const target = +counter.dataset.target;
-                        const duration = 1500; // ms
-                        const step = target / (duration / 16); // 60fps
-                        let current = 0;
-                        const update = () => {
-                            current += step;
-                            if (current < target) {
-                                counter.textContent = Math.floor(current);
-                                requestAnimationFrame(update);
-                            } else {
-                                counter.textContent = target;
-                            }
-                        };
-                        update();
-                    });
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.card').forEach((card) => counterObserver.observe(card));
-
-        const year = document.getElementById('year');
-        year.textContent = new Date().getFullYear();
-    </script>
+// scroll progress + active nav link
+const bar=$('progress'),links=[...document.querySelectorAll('.nav-links a[href^="#"]')],secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';let cur=-1;secs.forEach((s,k)=>{if(s&&s.getBoundingClientRect().top<=120)cur=k});links.forEach((a,k)=>a.classList.toggle('active',k===cur))},{passive:true});
+$('year').textContent=new Date().getFullYear();
+</script>
 </body>
-
 </html>
